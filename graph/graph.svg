@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" width="1100" height="720" role="img" aria-label="LLM wiki knowledge graph of accounts, IKE guidelines, and exposure"><rect width="1100" height="720" fill="#f6f5f2"/>
+<text x="24" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#1a1a1a">Accounts × IKE × Exposure</text>
+<text x="24" y="46" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#5c5c5c">Nodes are wiki pages. Edges are markdown links. Size scales with degree.</text>
+<circle cx="720" cy="36" r="6" fill="#2E79B5"/><text x="732" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#1a1a1a">Account (Company)</text>
+<circle cx="845" cy="36" r="6" fill="#7B64B8"/><text x="857" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#1a1a1a">IKE guideline</text>
+<circle cx="970" cy="36" r="6" fill="#C06028"/><text x="982" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#1a1a1a">Exposure</text>
+<line x1="635.4" y1="501.6" x2="517.6" y2="467.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="635.4" y1="501.6" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="635.4" y1="501.6" x2="707.4" y2="555.6" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="635.4" y1="501.6" x2="754.2" y2="358.2" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="635.4" y1="501.6" x2="671.1" y2="403.6" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="570.8" y1="276.1" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="570.8" y1="276.1" x2="472.6" y2="248.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="570.8" y1="276.1" x2="492.2" y2="119.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="458.9" y1="599.4" x2="517.6" y2="467.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="458.9" y1="599.4" x2="354.4" y2="500.0" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="424.3" y1="473.8" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="424.3" y1="473.8" x2="311.2" y2="329.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="424.3" y1="473.8" x2="456.9" y2="379.5" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="311.2" y1="329.8" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="311.2" y1="329.8" x2="456.9" y2="379.5" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="395.3" y1="354.8" x2="517.6" y2="467.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="395.3" y1="354.8" x2="354.4" y2="500.0" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="562.1" y1="520.6" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="562.1" y1="520.6" x2="722.8" y2="450.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="562.1" y1="520.6" x2="456.9" y2="379.5" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="601.4" y1="416.6" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="601.4" y1="416.6" x2="722.8" y2="450.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="789.8" y1="193.0" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="789.8" y1="193.0" x2="712.0" y2="108.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="789.8" y1="193.0" x2="643.6" y2="117.5" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="789.8" y1="193.0" x2="650.5" y2="235.3" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="472.6" y1="248.1" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="472.6" y1="248.1" x2="371.7" y2="125.6" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="472.6" y1="248.1" x2="492.2" y2="119.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="472.6" y1="248.1" x2="456.9" y2="379.5" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="754.2" y1="358.2" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="754.2" y1="358.2" x2="650.5" y2="235.3" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="754.2" y1="358.2" x2="671.1" y2="403.6" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="707.4" y1="555.6" x2="517.6" y2="467.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="707.4" y1="555.6" x2="671.1" y2="403.6" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="307.0" y1="395.6" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="307.0" y1="395.6" x2="456.9" y2="379.5" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="371.7" y1="125.6" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="456.9" y1="379.5" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="456.9" y1="379.5" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="722.8" y1="450.8" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="722.8" y1="450.8" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="492.2" y1="119.8" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="643.6" y1="117.5" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="643.6" y1="117.5" x2="650.5" y2="235.3" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="712.0" y1="108.8" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="671.1" y1="403.6" x2="517.6" y2="467.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="671.1" y1="403.6" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="532.8" y1="216.3" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="532.8" y1="216.3" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="574.4" y1="169.7" x2="397.7" y2="243.8" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="650.5" y1="235.3" x2="705.4" y2="287.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="650.5" y1="235.3" x2="572.5" y2="363.9" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="650.5" y1="235.3" x2="532.8" y2="216.3" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<line x1="354.4" y1="500.0" x2="517.6" y2="467.1" stroke="#b9b6ae" stroke-width="1.2" opacity="0.85"/>
+<circle cx="574.4" cy="169.7" r="9.4" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="574.4" y="191.1" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-410 Thin named insured</text>
+<circle cx="458.9" cy="599.4" r="10.4" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="458.9" y="621.8" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Baxter Round Lake manufacturing</text>
+<circle cx="395.3" cy="354.8" r="10.4" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="395.3" y="377.2" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Baxter Deerfield campus</text>
+<circle cx="601.4" cy="416.6" r="10.4" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="601.4" y="439.0" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Axium Newark DC</text>
+<circle cx="307.0" cy="395.6" r="10.4" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="307.0" y="418.0" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Texwin Dallas warehouse</text>
+<circle cx="371.7" cy="125.6" r="10.4" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="371.7" y="148.0" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-310 Flood zone AE</text>
+<circle cx="712.0" cy="108.8" r="10.4" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="712.0" y="131.2" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-214 Cold storage</text>
+<circle cx="570.8" cy="276.1" r="11.2" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="570.8" y="299.2" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Harris County accumulation</text>
+<circle cx="424.3" cy="473.8" r="11.2" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="424.3" y="496.9" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Goya San Antonio DC</text>
+<circle cx="311.2" cy="329.8" r="11.2" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="311.2" y="352.9" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Texwin San Antonio warehouse</text>
+<circle cx="562.1" cy="520.6" r="11.2" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="562.1" y="543.8" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Goya Secaucus warehouse</text>
+<circle cx="707.4" cy="555.6" r="11.2" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="707.4" y="578.8" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Baxter Aibonito Puerto Rico</text>
+<circle cx="492.2" cy="119.8" r="11.2" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="492.2" y="142.9" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-510 Harris County accumulation</text>
+<circle cx="643.6" cy="117.5" r="11.2" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="643.6" y="140.6" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-210 Cooking and fryer lines</text>
+<circle cx="532.8" cy="216.3" r="11.2" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="532.8" y="239.4" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-240 Product contamination and re</text>
+<circle cx="354.4" cy="500.0" r="11.2" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="354.4" y="523.1" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-118 Life sciences occupancy</text>
+<circle cx="789.8" cy="193.0" r="11.8" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="789.8" y="216.8" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Axium Elk Grove plant</text>
+<circle cx="754.2" cy="358.2" r="11.8" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="754.2" y="382.0" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Goya Bayamón plant</text>
+<circle cx="722.8" cy="450.8" r="11.8" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="722.8" y="474.6" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-322 Coastal named storm</text>
+<circle cx="635.4" cy="501.6" r="12.4" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="635.4" y="525.9" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Puerto Rico book accumulation</text>
+<circle cx="472.6" cy="248.1" r="12.4" fill="#C06028" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="472.6" y="272.4" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Texwin Houston warehouse</text>
+<circle cx="671.1" cy="403.6" r="12.4" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="671.1" y="428.0" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-330 Puerto Rico CAT</text>
+<circle cx="650.5" cy="235.3" r="12.9" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="650.5" y="260.2" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-110 Food processing occupancy</text>
+<circle cx="517.6" cy="467.1" r="12.9" fill="#2E79B5" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="517.6" y="492.0" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Baxter International</text>
+<circle cx="456.9" cy="379.5" r="13.3" fill="#7B64B8" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="456.9" y="404.9" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">IKE-124 Warehouse occupancy</text>
+<circle cx="705.4" cy="287.1" r="13.3" fill="#2E79B5" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="705.4" y="312.4" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Axium Foods</text>
+<circle cx="397.7" cy="243.8" r="13.8" fill="#2E79B5" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="397.7" y="269.6" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Texwin Acq.</text>
+<circle cx="572.5" cy="363.9" r="14.2" fill="#2E79B5" stroke="#f6f5f2" stroke-width="1.5"/>
+<text x="572.5" y="390.1" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="#1a1a1a">Goya Foods</text>
+</svg>

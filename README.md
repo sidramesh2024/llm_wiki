@@ -7,12 +7,28 @@ Mock LLM-wiki / [Open Knowledge Format](https://github.com/GoogleCloudPlatform/o
 ## Layout
 
 ```
-okf/                  # OKF bundle (markdown concepts + [[links]])
+okf/                  # OKF bundle (markdown concepts + links)
   companies/          # Axium Foods, Baxter International, Goya Foods, Texwin Acquisitions
   ike/                # Mock IKE guideline articles
   exposure/           # Mock TIV / CAT / flood / accumulation docs
   syntheses/          # Compiled UW snapshots
+graph/                # LLM-wiki knowledge graph (SVG + interactive HTML)
 adk_underwriting/     # ADK router + three sub-agents
+```
+
+## Knowledge graph
+
+Wiki pages are **nodes**. Markdown links are **edges**. Color is page type; size is how many links the page has — the same encoding as an LLM-wiki Graph view (not a flowchart).
+
+![Accounts across IKE and exposure](graph/graph.svg)
+
+Blue = accounts, purple = IKE guidelines, orange = exposure. Shared nodes (food processing, warehouse, coastal wind, Puerto Rico CAT) sit between books.
+
+Interactive viewer (force layout, hover neighbors, click a node, search):
+
+```bash
+python3 scripts/build_graph.py   # regenerates graph/ from okf/
+open graph/graph.html
 ```
 
 ## Run the agent

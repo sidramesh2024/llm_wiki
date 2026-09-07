@@ -18,7 +18,9 @@ def _parse_frontmatter(raw: str) -> tuple[dict[str, str], str]:
         return {}, raw.strip()
     meta: dict[str, str] = {}
     for line in match.group(1).splitlines():
-        if ":" not in line or line.lstrip().startswith("-"):
+        if not line.strip() or line.startswith(" ") or line.startswith("\t"):
+            continue
+        if line.lstrip().startswith("-") or ":" not in line:
             continue
         key, value = line.split(":", 1)
         meta[key.strip()] = value.strip().strip('"')

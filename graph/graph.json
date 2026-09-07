@@ -1,0 +1,730 @@
+{
+  "nodes": [
+    {
+      "id": "exposure/accum-puerto-rico",
+      "label": "Puerto Rico book accumulation",
+      "title": "Puerto Rico book accumulation",
+      "type": "Exposure",
+      "description": "Mock PR property TIV vs IKE-UW-330 $80M cap.",
+      "path": "exposure/accum-puerto-rico.md",
+      "degree": 7,
+      "size": 22.583005244258363,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/accum-harris-county",
+      "label": "Harris County accumulation",
+      "title": "Harris County accumulation",
+      "type": "Exposure",
+      "description": "Mock book TIV in Harris County vs IKE-UW-510 cap.",
+      "path": "exposure/accum-harris-county.md",
+      "degree": 4,
+      "size": 20.0,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/baxter-round-lake",
+      "label": "Baxter Round Lake manufacturing",
+      "title": "Baxter Round Lake manufacturing",
+      "type": "Exposure",
+      "description": "Mock. $80M TIV life-sciences campus; high BI.",
+      "path": "exposure/baxter-round-lake.md",
+      "degree": 3,
+      "size": 18.928203230275507,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/goya-san-antonio-dc",
+      "label": "Goya San Antonio DC",
+      "title": "Goya San Antonio DC",
+      "type": "Exposure",
+      "description": "Mock. $12M TIV inland warehouse. Same metro as a Texwin site.",
+      "path": "exposure/goya-san-antonio-dc.md",
+      "degree": 3,
+      "size": 18.928203230275507,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/texwin-san-antonio-whse",
+      "label": "Texwin San Antonio warehouse",
+      "title": "Texwin San Antonio warehouse",
+      "type": "Exposure",
+      "description": "Mock. $10M TIV warehouse. Same metro as Goya DC.",
+      "path": "exposure/texwin-san-antonio-whse.md",
+      "degree": 3,
+      "size": 18.928203230275507,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/baxter-deerfield",
+      "label": "Baxter Deerfield campus",
+      "title": "Baxter Deerfield campus",
+      "type": "Exposure",
+      "description": "Mock. $30M TIV offices and labs. Inland IL.",
+      "path": "exposure/baxter-deerfield.md",
+      "degree": 2,
+      "size": 17.65685424949238,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/goya-secaucus",
+      "label": "Goya Secaucus warehouse",
+      "title": "Goya Secaucus warehouse",
+      "type": "Exposure",
+      "description": "Mock. $25M TIV DC in the NJ coastal named-storm band.",
+      "path": "exposure/goya-secaucus.md",
+      "degree": 4,
+      "size": 20.0,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/axium-newark-dc",
+      "label": "Axium Newark DC",
+      "title": "Axium Newark DC",
+      "type": "Exposure",
+      "description": "Mock. $18M TIV distribution center 12 miles from the Atlantic.",
+      "path": "exposure/axium-newark-dc.md",
+      "degree": 3,
+      "size": 18.928203230275507,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/axium-elk-grove-plant",
+      "label": "Axium Elk Grove plant",
+      "title": "Axium Elk Grove plant",
+      "type": "Exposure",
+      "description": "Mock. $22M TIV food plant with fryers and ammonia freezer. Inland IL.",
+      "path": "exposure/axium-elk-grove-plant.md",
+      "degree": 5,
+      "size": 20.94427190999916,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/texwin-houston-whse",
+      "label": "Texwin Houston warehouse",
+      "title": "Texwin Houston warehouse",
+      "type": "Exposure",
+      "description": "Mock. $38M TIV, FEMA zone AE, Harris County.",
+      "path": "exposure/texwin-houston-whse.md",
+      "degree": 6,
+      "size": 21.79795897113271,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/goya-bayamon-pr",
+      "label": "Goya Bayam\u00f3n plant",
+      "title": "Goya Bayam\u00f3n plant",
+      "type": "Exposure",
+      "description": "Mock. $20M TIV food plant in Puerto Rico.",
+      "path": "exposure/goya-bayamon-pr.md",
+      "degree": 5,
+      "size": 20.94427190999916,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/baxter-aibonito-pr",
+      "label": "Baxter Aibonito Puerto Rico",
+      "title": "Baxter Aibonito Puerto Rico",
+      "type": "Exposure",
+      "description": "Mock. $45M TIV manufacturing in Puerto Rico.",
+      "path": "exposure/baxter-aibonito-pr.md",
+      "degree": 4,
+      "size": 20.0,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "exposure/texwin-dallas-whse",
+      "label": "Texwin Dallas warehouse",
+      "title": "Texwin Dallas warehouse",
+      "type": "Exposure",
+      "description": "Mock. $15M TIV inland warehouse.",
+      "path": "exposure/texwin-dallas-whse.md",
+      "degree": 2,
+      "size": 17.65685424949238,
+      "color": "#C06028",
+      "group": 3
+    },
+    {
+      "id": "syntheses/goya-foods-uw",
+      "label": "Goya Foods snapshot",
+      "title": "Goya Foods Inc underwriting snapshot",
+      "type": "UW Snapshot",
+      "description": "Compiled join of Goya to food, warehouse, recall, coastal, and PR IKE.",
+      "path": "syntheses/goya-foods-uw.md",
+      "degree": 9,
+      "size": 24.0,
+      "color": "#1F8A65",
+      "group": 4
+    },
+    {
+      "id": "syntheses/baxter-international-uw",
+      "label": "Baxter International snapshot",
+      "title": "Baxter International underwriting snapshot",
+      "type": "UW Snapshot",
+      "description": "Compiled join of Baxter to life-sciences IKE, PR CAT, and three campuses.",
+      "path": "syntheses/baxter-international-uw.md",
+      "degree": 6,
+      "size": 21.79795897113271,
+      "color": "#1F8A65",
+      "group": 4
+    },
+    {
+      "id": "syntheses/axium-foods-uw",
+      "label": "Axium Foods snapshot",
+      "title": "Axium Foods Inc underwriting snapshot",
+      "type": "UW Snapshot",
+      "description": "Compiled join of Axium to IKE-UW-110/210/214/240/322 and two locations.",
+      "path": "syntheses/axium-foods-uw.md",
+      "degree": 8,
+      "size": 23.31370849898476,
+      "color": "#1F8A65",
+      "group": 4
+    },
+    {
+      "id": "syntheses/texwin-acquisitions-uw",
+      "label": "Texwin Acquisitions LLC snapshot",
+      "title": "Texwin Acquisitions LLC underwriting snapshot",
+      "type": "UW Snapshot",
+      "description": "Compiled join of Texwin to warehouse, AE flood, thin-insured, and Harris cap.",
+      "path": "syntheses/texwin-acquisitions-uw.md",
+      "degree": 7,
+      "size": 22.583005244258363,
+      "color": "#1F8A65",
+      "group": 4
+    },
+    {
+      "id": "ike/flood-zone-ae",
+      "label": "IKE-310 Flood zone AE",
+      "title": "IKE-UW-310 Flood zone AE",
+      "type": "IKE Guideline",
+      "description": "Referral and primary-NFIP rules for FEMA zone AE.",
+      "path": "ike/flood-zone-ae.md",
+      "degree": 3,
+      "size": 18.928203230275507,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/occupancy-warehouse",
+      "label": "IKE-124 Warehouse occupancy",
+      "title": "IKE-UW-124 Warehouse occupancy",
+      "type": "IKE Guideline",
+      "description": "Appetite for warehousing, 3PL, and distribution.",
+      "path": "ike/occupancy-warehouse.md",
+      "degree": 9,
+      "size": 24.0,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/coastal-named-storm",
+      "label": "IKE-322 Coastal named storm",
+      "title": "IKE-UW-322 Coastal named storm",
+      "type": "IKE Guideline",
+      "description": "Wind sublimits and deductibles within 20 miles of a coastline.",
+      "path": "ike/coastal-named-storm.md",
+      "degree": 6,
+      "size": 21.79795897113271,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/harris-county-accumulation",
+      "label": "IKE-510 Harris County accumulation",
+      "title": "IKE-UW-510 Harris County accumulation",
+      "type": "IKE Guideline",
+      "description": "County cap for property TIV in Harris County, Texas.",
+      "path": "ike/harris-county-accumulation.md",
+      "degree": 4,
+      "size": 20.0,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/hazard-cooking-fryer",
+      "label": "IKE-210 Cooking and fryer lines",
+      "title": "IKE-UW-210 Cooking and fryer lines",
+      "type": "IKE Guideline",
+      "description": "Extra protection required when food occupancy includes frying.",
+      "path": "ike/hazard-cooking-fryer.md",
+      "degree": 4,
+      "size": 20.0,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/hazard-cold-storage",
+      "label": "IKE-214 Cold storage",
+      "title": "IKE-UW-214 Cold storage",
+      "type": "IKE Guideline",
+      "description": "Ammonia and freezer rules for frozen-food locations.",
+      "path": "ike/hazard-cold-storage.md",
+      "degree": 3,
+      "size": 18.928203230275507,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/puerto-rico-cat",
+      "label": "IKE-330 Puerto Rico CAT",
+      "title": "IKE-UW-330 Puerto Rico CAT",
+      "type": "IKE Guideline",
+      "description": "Wind, flood, and quake rules for Puerto Rico locations.",
+      "path": "ike/puerto-rico-cat.md",
+      "degree": 7,
+      "size": 22.583005244258363,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/product-contamination-recall",
+      "label": "IKE-240 Product contamination and re",
+      "title": "IKE-UW-240 Product contamination and recall",
+      "type": "IKE Guideline",
+      "description": "Product-liability and recall appetite for food manufacturers.",
+      "path": "ike/product-contamination-recall.md",
+      "degree": 5,
+      "size": 20.94427190999916,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/thin-named-insured",
+      "label": "IKE-410 Thin named insured",
+      "title": "IKE-UW-410 Thin named insured",
+      "type": "IKE Guideline",
+      "description": "New-venture and acquisition-vehicle underwriting.",
+      "path": "ike/thin-named-insured.md",
+      "degree": 2,
+      "size": 17.65685424949238,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/occupancy-food-processing",
+      "label": "IKE-110 Food processing occupancy",
+      "title": "IKE-UW-110 Food processing occupancy",
+      "type": "IKE Guideline",
+      "description": "Appetite and referral rules for food manufacturing and packing.",
+      "path": "ike/occupancy-food-processing.md",
+      "degree": 8,
+      "size": 23.31370849898476,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "ike/occupancy-life-sciences",
+      "label": "IKE-118 Life sciences occupancy",
+      "title": "IKE-UW-118 Life sciences occupancy",
+      "type": "IKE Guideline",
+      "description": "Appetite for medical-device and biopharma manufacturing.",
+      "path": "ike/occupancy-life-sciences.md",
+      "degree": 4,
+      "size": 20.0,
+      "color": "#7B64B8",
+      "group": 2
+    },
+    {
+      "id": "companies/texwin-acquisitions",
+      "label": "Texwin Acq.",
+      "title": "Texwin Acquisitions LLC",
+      "type": "Company",
+      "description": "Mock applicant. Texas warehouse holdco formed 2025; $71M TIV.",
+      "path": "companies/texwin-acquisitions.md",
+      "degree": 9,
+      "size": 24.0,
+      "color": "#2E79B5",
+      "group": 1
+    },
+    {
+      "id": "companies/axium-foods",
+      "label": "Axium Foods",
+      "title": "Axium Foods Inc",
+      "type": "Company",
+      "description": "Mock applicant. Snack and frozen-food manufacturer seeking $40M property.",
+      "path": "companies/axium-foods.md",
+      "degree": 8,
+      "size": 23.31370849898476,
+      "color": "#2E79B5",
+      "group": 1
+    },
+    {
+      "id": "companies/goya-foods",
+      "label": "Goya Foods",
+      "title": "Goya Foods Inc",
+      "type": "Company",
+      "description": "Mock applicant. Food manufacturing and distribution; $70M property.",
+      "path": "companies/goya-foods.md",
+      "degree": 10,
+      "size": 24.64911064067352,
+      "color": "#2E79B5",
+      "group": 1
+    },
+    {
+      "id": "companies/baxter-international",
+      "label": "Baxter International",
+      "title": "Baxter International",
+      "type": "Company",
+      "description": "Mock applicant. Life-sciences manufacturing; $250M property schedule.",
+      "path": "companies/baxter-international.md",
+      "degree": 7,
+      "size": 22.583005244258363,
+      "color": "#2E79B5",
+      "group": 1
+    }
+  ],
+  "edges": [
+    {
+      "from": "exposure/accum-puerto-rico",
+      "to": "companies/baxter-international"
+    },
+    {
+      "from": "exposure/accum-puerto-rico",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "exposure/accum-puerto-rico",
+      "to": "exposure/baxter-aibonito-pr"
+    },
+    {
+      "from": "exposure/accum-puerto-rico",
+      "to": "exposure/goya-bayamon-pr"
+    },
+    {
+      "from": "exposure/accum-puerto-rico",
+      "to": "ike/puerto-rico-cat"
+    },
+    {
+      "from": "exposure/accum-harris-county",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "exposure/accum-harris-county",
+      "to": "exposure/texwin-houston-whse"
+    },
+    {
+      "from": "exposure/accum-harris-county",
+      "to": "ike/harris-county-accumulation"
+    },
+    {
+      "from": "exposure/baxter-round-lake",
+      "to": "companies/baxter-international"
+    },
+    {
+      "from": "exposure/baxter-round-lake",
+      "to": "ike/occupancy-life-sciences"
+    },
+    {
+      "from": "exposure/goya-san-antonio-dc",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "exposure/goya-san-antonio-dc",
+      "to": "exposure/texwin-san-antonio-whse"
+    },
+    {
+      "from": "exposure/goya-san-antonio-dc",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "exposure/texwin-san-antonio-whse",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "exposure/texwin-san-antonio-whse",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "exposure/baxter-deerfield",
+      "to": "companies/baxter-international"
+    },
+    {
+      "from": "exposure/baxter-deerfield",
+      "to": "ike/occupancy-life-sciences"
+    },
+    {
+      "from": "exposure/goya-secaucus",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "exposure/goya-secaucus",
+      "to": "ike/coastal-named-storm"
+    },
+    {
+      "from": "exposure/goya-secaucus",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "exposure/axium-newark-dc",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "exposure/axium-newark-dc",
+      "to": "ike/coastal-named-storm"
+    },
+    {
+      "from": "exposure/axium-elk-grove-plant",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "exposure/axium-elk-grove-plant",
+      "to": "ike/hazard-cold-storage"
+    },
+    {
+      "from": "exposure/axium-elk-grove-plant",
+      "to": "ike/hazard-cooking-fryer"
+    },
+    {
+      "from": "exposure/axium-elk-grove-plant",
+      "to": "ike/occupancy-food-processing"
+    },
+    {
+      "from": "exposure/texwin-houston-whse",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "exposure/texwin-houston-whse",
+      "to": "ike/flood-zone-ae"
+    },
+    {
+      "from": "exposure/texwin-houston-whse",
+      "to": "ike/harris-county-accumulation"
+    },
+    {
+      "from": "exposure/texwin-houston-whse",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "exposure/goya-bayamon-pr",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "exposure/goya-bayamon-pr",
+      "to": "ike/occupancy-food-processing"
+    },
+    {
+      "from": "exposure/goya-bayamon-pr",
+      "to": "ike/puerto-rico-cat"
+    },
+    {
+      "from": "exposure/baxter-aibonito-pr",
+      "to": "companies/baxter-international"
+    },
+    {
+      "from": "exposure/baxter-aibonito-pr",
+      "to": "ike/puerto-rico-cat"
+    },
+    {
+      "from": "exposure/texwin-dallas-whse",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "exposure/texwin-dallas-whse",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "exposure/accum-puerto-rico"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "exposure/goya-bayamon-pr"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "exposure/goya-secaucus"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "ike/coastal-named-storm"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "ike/occupancy-food-processing"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "ike/product-contamination-recall"
+    },
+    {
+      "from": "syntheses/goya-foods-uw",
+      "to": "ike/puerto-rico-cat"
+    },
+    {
+      "from": "syntheses/baxter-international-uw",
+      "to": "companies/baxter-international"
+    },
+    {
+      "from": "syntheses/baxter-international-uw",
+      "to": "exposure/accum-puerto-rico"
+    },
+    {
+      "from": "syntheses/baxter-international-uw",
+      "to": "exposure/baxter-aibonito-pr"
+    },
+    {
+      "from": "syntheses/baxter-international-uw",
+      "to": "exposure/baxter-round-lake"
+    },
+    {
+      "from": "syntheses/baxter-international-uw",
+      "to": "ike/occupancy-life-sciences"
+    },
+    {
+      "from": "syntheses/baxter-international-uw",
+      "to": "ike/puerto-rico-cat"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "exposure/axium-elk-grove-plant"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "exposure/axium-newark-dc"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "ike/coastal-named-storm"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "ike/hazard-cold-storage"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "ike/hazard-cooking-fryer"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "ike/occupancy-food-processing"
+    },
+    {
+      "from": "syntheses/axium-foods-uw",
+      "to": "ike/product-contamination-recall"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "exposure/accum-harris-county"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "exposure/texwin-houston-whse"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "ike/flood-zone-ae"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "ike/harris-county-accumulation"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "ike/occupancy-warehouse"
+    },
+    {
+      "from": "syntheses/texwin-acquisitions-uw",
+      "to": "ike/thin-named-insured"
+    },
+    {
+      "from": "ike/flood-zone-ae",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "ike/occupancy-warehouse",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "ike/occupancy-warehouse",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "ike/coastal-named-storm",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "ike/coastal-named-storm",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "ike/harris-county-accumulation",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "ike/hazard-cooking-fryer",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "ike/hazard-cooking-fryer",
+      "to": "ike/occupancy-food-processing"
+    },
+    {
+      "from": "ike/hazard-cold-storage",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "ike/puerto-rico-cat",
+      "to": "companies/baxter-international"
+    },
+    {
+      "from": "ike/puerto-rico-cat",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "ike/product-contamination-recall",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "ike/product-contamination-recall",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "ike/thin-named-insured",
+      "to": "companies/texwin-acquisitions"
+    },
+    {
+      "from": "ike/occupancy-food-processing",
+      "to": "companies/axium-foods"
+    },
+    {
+      "from": "ike/occupancy-food-processing",
+      "to": "companies/goya-foods"
+    },
+    {
+      "from": "ike/occupancy-food-processing",
+      "to": "ike/product-contamination-recall"
+    },
+    {
+      "from": "ike/occupancy-life-sciences",
+      "to": "companies/baxter-international"
+    }
+  ]
+}
