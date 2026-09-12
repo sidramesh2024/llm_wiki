@@ -1,6 +1,6 @@
 # llm_wiki
 
-Mock LLM-wiki / [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format) bundle plus a Google ADK router that walks the graph, then calls Company, IKE, and Exposure specialists.
+Mock LLM-wiki / [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format) bundle plus a Google ADK router that walks the graph, then calls Company, IKE, and Exposure specialists. A Neo4j Graph RAG example on the same accounts is in [graph_rag/](graph_rag/README.md).
 
 **All underwriting figures are fictional.** Named companies are used only as example applicants.
 
@@ -13,6 +13,7 @@ okf/                  # OKF bundle (markdown concepts + links)
   exposure/           # Mock TIV / CAT / flood / accumulation docs
   syntheses/          # Compiled UW snapshots
 graph/                # LLM-wiki knowledge graph (SVG + interactive HTML)
+graph_rag/            # Neo4j Graph RAG example (typed nodes + query-time expansion)
 adk_underwriting/     # ADK router + three sub-agents
 ```
 
@@ -47,3 +48,15 @@ Example questions:
 The router calls `okf_resolve_company` first, then invokes `company_agent`, `ike_agent`, and `exposure_agent` with only the linked document ids.
 
 On GCP, replace the mock datastore tools in `adk_underwriting/tools.py` with `VertexAiSearchTool` pointed at your three Vertex AI Search datastores. Keep the OKF resolve step as the graph layer.
+
+## LLM wiki vs Graph RAG
+
+Side-by-side on the same Texwin / Houston question: [graph_rag/README.md](graph_rag/README.md).
+
+```bash
+pip install -r requirements.txt
+chmod +x scripts/start_neo4j.sh
+./scripts/start_neo4j.sh
+python3 -m graph_rag.load
+python3 -m graph_rag "Can we write Texwin Acquisitions for the Houston warehouse?"
+```

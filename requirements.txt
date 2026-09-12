@@ -1,1 +1,2 @@
 google-adk>=1.0.0
+neo4j>=5.0.0
