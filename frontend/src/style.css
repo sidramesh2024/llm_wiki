@@ -1,0 +1,142 @@
+:root {
+  --paper: #f3efe4;
+  --ink: #1c1915;
+  --muted: #6d6458;
+  --line: #d9d0c1;
+  --card: #fffdf8;
+  --knowledge: #1f6b4a;
+  --web: #8a5a12;
+  --mixed: #3d4f7c;
+  --danger: #8c2f2f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+aside {
+  border-right: 1px solid var(--line);
+  padding: 28px 22px;
+}
+
+h1, h2 {
+  font-family: Newsreader, serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 { font-size: 1.8rem; line-height: 1.1; }
+h2 { font-size: 0.95rem; margin-bottom: 8px; }
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+aside p, .hint { color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+
+ul { margin: 0; padding-left: 1.1rem; }
+li { margin: 6px 0; font-size: 0.92rem; }
+.store { font-family: ui-monospace, monospace; font-size: 0.8rem; color: var(--muted); }
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.thread {
+  flex: 1;
+  overflow: auto;
+  padding: 28px 8vw 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bubble {
+  max-width: 720px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+.bubble.user { align-self: flex-end; background: #ebe4d4; }
+.bubble.assistant { align-self: flex-start; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-bottom: 8px;
+  color: white;
+}
+.tag.knowledge { background: var(--knowledge); }
+.tag.web { background: var(--web); }
+.tag.mixed { background: var(--mixed); }
+.tag.error { background: var(--danger); }
+
+.composer {
+  padding: 12px 8vw 22px;
+  display: flex;
+  gap: 8px;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  background: var(--card);
+  color: var(--ink);
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+button:disabled { opacity: 0.5; cursor: default; }
+
+.prompts { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 8vw; }
+.prompts button {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 800px) {
+  #app { grid-template-columns: 1fr; }
+  aside { border-right: 0; border-bottom: 1px solid var(--line); }
+  .thread, .composer, .prompts { padding-left: 16px; padding-right: 16px; }
+}

@@ -1,0 +1,490 @@
+{
+  "nodes": [
+    {
+      "id": "exposure/accum-puerto-rico",
+      "label": "Accumulation",
+      "title": "Puerto Rico book accumulation",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Puerto Rico book accumulation\n\n| Field | Value |\n|---|---|\n| In-force TIV (ex these submissions) | $22M |\n| IKE cap | $80M ([IKE-UW-330](../ike/puerto-rico-cat.md)) |\n| Baxter Aibonito | $45M |\n| Goya Bayam\u00f3n | $20M |\n\nIf both bind: $22M + $45M + $20M = **$87M**, over the $80M PR cap.\nBaxter alone: $67M (within cap, still PR referral).\nGoya alone: $42M (within cap, still PR referral).\n\n## Linked\n\n* [Baxter Aibonito](baxter-aibonito-pr.md)\n* [Goya Bayam\u00f3n](goya-bayamon-pr.md)\n* [Baxter International](../companies/baxter-international.md)\n* [Goya Foods Inc](../companies/goya-foods.md)"
+    },
+    {
+      "id": "exposure/accum-harris-county",
+      "label": "Accumulation",
+      "title": "Harris County accumulation",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Harris County accumulation\n\n| Field | Value |\n|---|---|\n| In-force + bound TIV | $318M |\n| IKE cap | $350M ([IKE-UW-510](../ike/harris-county-accumulation.md)) |\n| Headroom | $32M |\n| This submission | [Texwin Houston](texwin-houston-whse.md) $38M |\n\n$318M + $38M = **$356M**, which breaches the $350M cap (CAT-desk referral).\n\n## Linked\n\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)\n* [IKE-UW-510 Harris County accumulation](../ike/harris-county-accumulation.md)"
+    },
+    {
+      "id": "exposure/baxter-round-lake",
+      "label": "Location",
+      "title": "Baxter Round Lake manufacturing",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Baxter Round Lake manufacturing\n\n| Field | Value |\n|---|---|\n| Address | Round Lake, IL |\n| TIV | $80M |\n| Occupancy | Device + sterile utilities |\n| BI | ~45% of TIV |\n| Flood | Zone X |\n\n## Company\n\n* [Baxter International](../companies/baxter-international.md)\n\n## IKE that fires\n\n* [IKE-UW-118 Life sciences](../ike/occupancy-life-sciences.md) \u2014 under $100M campus cap, but BI > 40% is referral"
+    },
+    {
+      "id": "exposure/goya-san-antonio-dc",
+      "label": "Location",
+      "title": "Goya San Antonio DC",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Goya San Antonio DC\n\n| Field | Value |\n|---|---|\n| Address | San Antonio, TX |\n| TIV | $12M |\n| Occupancy | Dry grocery warehouse, ESFR |\n| Flood | Zone X |\n\n## Company\n\n* [Goya Foods Inc](../companies/goya-foods.md)\n\n## IKE that fires\n\n* [IKE-UW-124 Warehouse](../ike/occupancy-warehouse.md)\n\nSame city as [Texwin San Antonio warehouse](texwin-san-antonio-whse.md) (no shared IKE cap; not Harris County)."
+    },
+    {
+      "id": "exposure/texwin-san-antonio-whse",
+      "label": "Location",
+      "title": "Texwin San Antonio warehouse",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Texwin San Antonio warehouse\n\n| Field | Value |\n|---|---|\n| Address | San Antonio, TX |\n| TIV | $10M |\n| Occupancy | Warehouse, ESFR |\n| Flood | Zone X |\n\n## Company\n\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)\n\n## IKE that fires\n\n* [IKE-UW-124 Warehouse](../ike/occupancy-warehouse.md)\n\nNearby: [Goya San Antonio DC](goya-san-antonio-dc.md)."
+    },
+    {
+      "id": "exposure/baxter-deerfield",
+      "label": "Location",
+      "title": "Baxter Deerfield campus",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Baxter Deerfield campus\n\n| Field | Value |\n|---|---|\n| Address | Deerfield, IL |\n| TIV | $30M |\n| Occupancy | HQ, labs, light manufacturing |\n| Flood | Zone X |\n\n## Company\n\n* [Baxter International](../companies/baxter-international.md)\n\n## IKE that fires\n\n* [IKE-UW-118 Life sciences](../ike/occupancy-life-sciences.md) \u2014 within campus cap"
+    },
+    {
+      "id": "exposure/goya-secaucus",
+      "label": "Location",
+      "title": "Goya Secaucus warehouse",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Goya Secaucus warehouse\n\n| Field | Value |\n|---|---|\n| Address | Secaucus, NJ |\n| TIV | $25M |\n| Occupancy | Food distribution, ESFR, masonry |\n| Distance to coast | 9 miles |\n\n## Company\n\n* [Goya Foods Inc](../companies/goya-foods.md)\n\n## IKE that fires\n\n* [IKE-UW-124 Warehouse](../ike/occupancy-warehouse.md) \u2014 under $40M building cap\n* [IKE-UW-322 Coastal named storm](../ike/coastal-named-storm.md)"
+    },
+    {
+      "id": "exposure/axium-newark-dc",
+      "label": "Location",
+      "title": "Axium Newark DC",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Axium Newark DC\n\n| Field | Value |\n|---|---|\n| Address | Newark, NJ |\n| TIV | $18M |\n| Occupancy | Dry + refrigerated finished goods |\n| Construction | Masonry, ESFR |\n| Distance to coast | 12 miles |\n| Flood | Zone X |\n\n## Company\n\n* [Axium Foods Inc](../companies/axium-foods.md)\n\n## IKE that fires\n\n* [IKE-UW-322 Coastal named storm](../ike/coastal-named-storm.md) \u2014 2% named-storm deductible"
+    },
+    {
+      "id": "exposure/axium-elk-grove-plant",
+      "label": "Location",
+      "title": "Axium Elk Grove plant",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Axium Elk Grove plant\n\n| Field | Value |\n|---|---|\n| Address | Elk Grove Village, IL |\n| TIV | $22M |\n| Occupancy | Snack frying + frozen packing |\n| Construction | Masonry non-combustible, wet-pipe sprinklers |\n| Flood | Zone X |\n| Special hazards | Three fryer lines; 8,200 lbs ammonia |\n\n## Company\n\n* [Axium Foods Inc](../companies/axium-foods.md)\n\n## IKE that fires\n\n* [IKE-UW-110 Food processing](../ike/occupancy-food-processing.md) \u2014 $22M under $30M site cap\n* [IKE-UW-210 Cooking and fryer](../ike/hazard-cooking-fryer.md) \u2014 fryer BTU forces referral\n* [IKE-UW-214 Cold storage](../ike/hazard-cold-storage.md) \u2014 ammonia above 5,000 lbs"
+    },
+    {
+      "id": "exposure/texwin-houston-whse",
+      "label": "Location",
+      "title": "Texwin Houston warehouse",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Texwin Houston warehouse\n\n| Field | Value |\n|---|---|\n| Address | Houston, TX (Harris County) |\n| TIV | $38M |\n| Occupancy | Industrial warehouse, ESFR, masonry |\n| Flood | Zone AE |\n| Elevation cert | Missing |\n| Distance to Gulf | 25 miles (outside 20-mile named-storm band) |\n\n## Company\n\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)\n\n## IKE that fires\n\n* [IKE-UW-124 Warehouse](../ike/occupancy-warehouse.md) \u2014 under $40M building cap\n* [IKE-UW-310 Flood zone AE](../ike/flood-zone-ae.md) \u2014 AE above $10M is referral; no elevation cert\n* [IKE-UW-510 Harris County accumulation](../ike/harris-county-accumulation.md)\n* [Harris County accumulation](accum-harris-county.md)"
+    },
+    {
+      "id": "exposure/goya-bayamon-pr",
+      "label": "Location",
+      "title": "Goya Bayam\u00f3n plant",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Goya Bayam\u00f3n plant\n\n| Field | Value |\n|---|---|\n| Address | Bayam\u00f3n, PR |\n| TIV | $20M |\n| Occupancy | Packaged-food manufacturing |\n\n## Company\n\n* [Goya Foods Inc](../companies/goya-foods.md)\n\n## IKE that fires\n\n* [IKE-UW-110 Food processing](../ike/occupancy-food-processing.md)\n* [IKE-UW-330 Puerto Rico CAT](../ike/puerto-rico-cat.md)\n* [Puerto Rico book accumulation](accum-puerto-rico.md)"
+    },
+    {
+      "id": "exposure/baxter-aibonito-pr",
+      "label": "Location",
+      "title": "Baxter Aibonito Puerto Rico",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Baxter Aibonito Puerto Rico\n\n| Field | Value |\n|---|---|\n| Address | Aibonito, PR |\n| TIV | $45M |\n| Occupancy | Device manufacturing |\n| CAT | Wind + quake; 8 miles inland from south coast |\n\n## Company\n\n* [Baxter International](../companies/baxter-international.md)\n\n## IKE that fires\n\n* [IKE-UW-330 Puerto Rico CAT](../ike/puerto-rico-cat.md) \u2014 all PR is referral\n* [Puerto Rico book accumulation](accum-puerto-rico.md)"
+    },
+    {
+      "id": "exposure/texwin-dallas-whse",
+      "label": "Location",
+      "title": "Texwin Dallas warehouse",
+      "datastore": "exposures",
+      "article_id": "",
+      "excerpt": "# Texwin Dallas warehouse\n\n| Field | Value |\n|---|---|\n| Address | Dallas, TX |\n| TIV | $15M |\n| Occupancy | Warehouse, ESFR |\n| Flood | Zone X |\n\n## Company\n\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)\n\n## IKE that fires\n\n* [IKE-UW-124 Warehouse](../ike/occupancy-warehouse.md)"
+    },
+    {
+      "id": "ike/flood-zone-ae",
+      "label": "Guideline",
+      "title": "IKE-UW-310 Flood zone AE",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-310",
+      "excerpt": "# IKE-UW-310 Flood zone AE\n\n## Rule\n\n- Zone AE is **referral-only** above **$10M** TIV at the site.\n- NFIP primary required where eligible.\n- New coastal AE without an elevation certificate is a decline.\n\n## Linked exposure\n\n* [Texwin Houston warehouse](../exposure/texwin-houston-whse.md)\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)"
+    },
+    {
+      "id": "ike/occupancy-warehouse",
+      "label": "Guideline",
+      "title": "IKE-UW-124 Warehouse occupancy",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-124",
+      "excerpt": "# IKE-UW-124 Warehouse occupancy\n\nApplies to finished-goods distribution, 3PL, and dry or refrigerated warehouse.\n\n## Appetite\n\n- Target: masonry or better, ESFR sprinklers, 30 ft or lower storage.\n- Maximum without referral: **$40M** TIV per building.\n\n## Referral / decline\n\n- Referral: plastic commodities in racks above 25 ft, or tenant-controlled\n  hazards unknown to the named insured.\n- Decline: frame construction over $10M in a CAT zone.\n\n## Linked applicants\n\n* [Goya Foods Inc](../companies/goya-foods.md)\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)"
+    },
+    {
+      "id": "ike/coastal-named-storm",
+      "label": "Guideline",
+      "title": "IKE-UW-322 Coastal named storm",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-322",
+      "excerpt": "# IKE-UW-322 Coastal named storm\n\n## Rule\n\n- Within **20 miles** of the Atlantic or Gulf coast: named-storm deductible\n  **2%** of TIV, minimum $100,000.\n- Wind sublimit unless construction is masonry non-combustible or better.\n- Frame construction in this band is a decline over $10M.\n\n## Linked applicants and sites\n\n* [Axium Newark DC](../exposure/axium-newark-dc.md)\n* [Goya Secaucus warehouse](../exposure/goya-secaucus.md)\n* [Axium Foods Inc](../companies/axium-foods.md)\n* [Goya Foods Inc](../companies/goya-foods.md)"
+    },
+    {
+      "id": "ike/harris-county-accumulation",
+      "label": "Guideline",
+      "title": "IKE-UW-510 Harris County accumulation",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-510",
+      "excerpt": "# IKE-UW-510 Harris County accumulation\n\n## Rule\n\n- Maximum in-force + bound TIV in Harris County: **$350M**.\n- New submissions that would breach the cap are referral to CAT desk;\n  above $400M is a decline pending treaty.\n\n## Linked exposure\n\n* [Harris County accumulation](../exposure/accum-harris-county.md)\n* [Texwin Houston warehouse](../exposure/texwin-houston-whse.md)\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)"
+    },
+    {
+      "id": "ike/hazard-cooking-fryer",
+      "label": "Guideline",
+      "title": "IKE-UW-210 Cooking and fryer lines",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-210",
+      "excerpt": "# IKE-UW-210 Cooking and fryer lines\n\nStacks with [IKE-UW-110 Food processing occupancy](occupancy-food-processing.md).\n\n## Rule\n\n- Wet-chemical or water-mist over fryers, plus listed hood suppression.\n- Semi-annual cleaning records required.\n- Any fryer line over 2M BTU is automatic referral even if TIV is within\n  occupancy limits.\n\n## Linked applicants\n\n* [Axium Foods Inc](../companies/axium-foods.md)\n\nLocation: [Axium Elk Grove plant](../exposure/axium-elk-grove-plant.md)."
+    },
+    {
+      "id": "ike/hazard-cold-storage",
+      "label": "Guideline",
+      "title": "IKE-UW-214 Cold storage",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-214",
+      "excerpt": "# IKE-UW-214 Cold storage\n\n## Rule\n\n- Ammonia refrigeration: referral above 5,000 lbs inventory; require\n  mechanical-integrity program.\n- Freezer TIV counts toward food-processing caps in IKE-UW-110.\n\n## Linked applicants\n\n* [Axium Foods Inc](../companies/axium-foods.md)\n\nLocation: [Axium Elk Grove plant](../exposure/axium-elk-grove-plant.md)."
+    },
+    {
+      "id": "ike/puerto-rico-cat",
+      "label": "Guideline",
+      "title": "IKE-UW-330 Puerto Rico CAT",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-330",
+      "excerpt": "# IKE-UW-330 Puerto Rico CAT\n\n## Rule\n\n- All Puerto Rico property is referral.\n- Named-storm deductible 5% of TIV; earthquake sublimit required.\n- Book accumulation cap for Puerto Rico: **$80M** (see\n  [Puerto Rico accumulation](../exposure/accum-puerto-rico.md)).\n\n## Linked applicants\n\n* [Baxter International](../companies/baxter-international.md)\n* [Goya Foods Inc](../companies/goya-foods.md)\n* [Baxter Aibonito plant](../exposure/baxter-aibonito-pr.md)\n* [Goya Bayam\u00f3n plant](../exposure/goya-bayamon-pr.md)"
+    },
+    {
+      "id": "ike/product-contamination-recall",
+      "label": "Guideline",
+      "title": "IKE-UW-240 Product contamination and recall",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-240",
+      "excerpt": "# IKE-UW-240 Product contamination and recall\n\n## Appetite\n\n- Accidental contamination and government-recall sublimits available to\n  food occupancies that maintain a written recall plan and mock-recall log.\n- Maximum recall sublimit without referral: **$5M**.\n\n## Referral\n\n- Brands with national distribution and no crisis-communications vendor.\n- Prior FDA warning letter in the last 36 months.\n\n## Linked applicants\n\n* [Axium Foods Inc](../companies/axium-foods.md)\n* [Goya Foods Inc](../companies/goya-foods.md)"
+    },
+    {
+      "id": "ike/thin-named-insured",
+      "label": "Guideline",
+      "title": "IKE-UW-410 Thin named insured",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-410",
+      "excerpt": "# IKE-UW-410 Thin named insured\n\nApplies when the applicant is an LLC or holdco formed in the last 24 months,\nor when operating history sits in a recently acquired target.\n\n## Rule\n\n- Automatic referral.\n- Require three years of target loss runs, not the LLC's blank history.\n- Additional named insureds and mortgagees must be scheduled.\n- Decline if no loss runs and TIV exceeds $25M.\n\n## Linked applicants\n\n* [Texwin Acquisitions LLC](../companies/texwin-acquisitions.md)"
+    },
+    {
+      "id": "ike/occupancy-food-processing",
+      "label": "Guideline",
+      "title": "IKE-UW-110 Food processing occupancy",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-110",
+      "excerpt": "# IKE-UW-110 Food processing occupancy\n\nApplies to snack, frozen, canned, and packaged-food manufacturing.\n\n## Appetite\n\n- Target: sprinklered, FM-approved cooking protection, recall plan on file.\n- Maximum without referral: **$30M** TIV at a single food-processing location.\n- Combined food-processing schedule without referral: **$75M**.\n\n## Referral / decline\n\n- Referral: any location with deep-fat frying, ammonia refrigeration, or unsprinklered processing.\n- Decline: uninsured product-recall exposure above $5M with no crisis vendor.\n\n## Linked applicants\n\n* [Axium Foods Inc](../companies/axium-foods.md)\n* [Goya Foods Inc](../companies/goya-foods.md)\n\nSee also [IKE-UW-210 Cooking and fryer lines](hazard-cooking-fryer.md) and\n[IKE-UW-240 Product contamination and recall](product-contamination-recall.md)."
+    },
+    {
+      "id": "ike/occupancy-life-sciences",
+      "label": "Guideline",
+      "title": "IKE-UW-118 Life sciences occupancy",
+      "datastore": "guidelines",
+      "article_id": "IKE-UW-118",
+      "excerpt": "# IKE-UW-118 Life sciences occupancy\n\nApplies to medical device, diagnostics, and biopharma manufacturing including\nclean rooms and validated utilities.\n\n## Appetite\n\n- Target: sprinklered campuses, redundant utilities, documented BI worksheet.\n- Maximum without referral: **$100M** TIV per campus.\n- Business interruption: require 18-month period of indemnity for sterile fill\n  or unique validated lines.\n\n## Referral / decline\n\n- Referral: single-source sterile capacity, or BI values above 40% of TIV.\n- Decline: unvalidated contract-manufacturing with no COPE.\n\n## Linked applicants\n\n* [Baxter International](../companies/baxter-international.md)"
+    },
+    {
+      "id": "companies/texwin-acquisitions",
+      "label": "Account",
+      "title": "Texwin Acquisitions LLC",
+      "datastore": "accounts",
+      "article_id": "",
+      "excerpt": "# Texwin Acquisitions LLC\n\nFictional acquisition vehicle. Operating history sits in three warehouse\ntargets closed in 2025\u20132026.\n\n## Application\n\n| Field | Value |\n|---|---|\n| Named insured | Texwin Acquisitions LLC |\n| Occupancy | Industrial warehouse (acquired) |\n| Requested limit | $71M blanket |\n| Loss runs | Target-level only (2019\u20132025); LLC itself is clean |\n\n## Locations\n\n* [Houston warehouse](../exposure/texwin-houston-whse.md) \u2014 flood zone AE\n* [Dallas warehouse](../exposure/texwin-dallas-whse.md)\n* [San Antonio warehouse](../exposure/texwin-san-antonio-whse.md)\n* [Harris County accumulation](../exposure/accum-harris-county.md)\n\n## Matching IKE\n\n* [IKE-UW-124 Warehouse occupancy](../ike/occupancy-warehouse.md)\n* [IKE-UW-310 Flood zone AE](../ike/flood-zone-ae.md)\n* [IKE-UW-410 Thin named insured](../ike/thin-named-insured.md)\n* [IKE-UW-510 Harris County accumulation](../ike/har"
+    },
+    {
+      "id": "companies/axium-foods",
+      "label": "Account",
+      "title": "Axium Foods Inc",
+      "datastore": "accounts",
+      "article_id": "",
+      "excerpt": "# Axium Foods Inc\n\nFictionalized underwriting card for this example (not a live submission).\n\n## Application\n\n| Field | Value |\n|---|---|\n| Named insured | Axium Foods Inc |\n| Occupancy | Snack frying lines + frozen finished goods |\n| Requested limit | $40M blanket property |\n| Years in business | 14 |\n\n## Locations\n\n* [Elk Grove Village, IL plant](../exposure/axium-elk-grove-plant.md) \u2014 processing, fryers, ammonia freezer\n* [Newark, NJ DC](../exposure/axium-newark-dc.md) \u2014 finished-goods distribution, ~12 miles from Atlantic\n\n## Matching IKE\n\n* [IKE-UW-110 Food processing occupancy](../ike/occupancy-food-processing.md)\n* [IKE-UW-210 Cooking and fryer lines](../ike/hazard-cooking-fryer.md)\n* [IKE-UW-214 Cold storage](../ike/hazard-cold-storage.md)\n* [IKE-UW-240 Product contamination and recall](../ike/product-contamination-recall.md)\n* [IKE-UW-322 Coastal named storm](../ike/coastal-name"
+    },
+    {
+      "id": "companies/goya-foods",
+      "label": "Account",
+      "title": "Goya Foods Inc",
+      "datastore": "accounts",
+      "article_id": "",
+      "excerpt": "# Goya Foods Inc\n\nFictionalized underwriting card for this example. Figures are not Goya's\nreal schedule.\n\n## Application\n\n| Field | Value |\n|---|---|\n| Named insured | Goya Foods Inc |\n| Occupancy | Packaged-food manufacturing + national DCs |\n| Requested limit | $70M property |\n| Recall plan | On file; last mock recall 2025-11 |\n\n## Locations\n\n* [Secaucus, NJ warehouse](../exposure/goya-secaucus.md) \u2014 coastal named-storm band\n* [Bayam\u00f3n, Puerto Rico plant](../exposure/goya-bayamon-pr.md)\n* [San Antonio, TX DC](../exposure/goya-san-antonio-dc.md)\n* [Puerto Rico book accumulation](../exposure/accum-puerto-rico.md)\n\n## Matching IKE\n\n* [IKE-UW-110 Food processing occupancy](../ike/occupancy-food-processing.md)\n* [IKE-UW-124 Warehouse occupancy](../ike/occupancy-warehouse.md)\n* [IKE-UW-240 Product contamination and recall](../ike/product-contamination-recall.md)\n* [IKE-UW-322 Coastal named "
+    },
+    {
+      "id": "companies/baxter-international",
+      "label": "Account",
+      "title": "Baxter International",
+      "datastore": "accounts",
+      "article_id": "",
+      "excerpt": "# Baxter International\n\nFictionalized underwriting card for this example. Figures are not Baxter's\nreal schedule.\n\n## Application\n\n| Field | Value |\n|---|---|\n| Named insured | Baxter International |\n| Occupancy | Medical-device and biopharma manufacturing |\n| Requested limit | $250M property |\n| Notes | Unique validated lines; high BI |\n\n## Locations\n\n* [Round Lake, IL manufacturing](../exposure/baxter-round-lake.md)\n* [Deerfield, IL campus](../exposure/baxter-deerfield.md)\n* [Aibonito, Puerto Rico](../exposure/baxter-aibonito-pr.md)\n* [Puerto Rico book accumulation](../exposure/accum-puerto-rico.md)\n\n## Matching IKE\n\n* [IKE-UW-118 Life sciences occupancy](../ike/occupancy-life-sciences.md)\n* [IKE-UW-330 Puerto Rico CAT](../ike/puerto-rico-cat.md)\n\n## Snapshot\n\n* [Baxter UW snapshot](../syntheses/baxter-international-uw.md)"
+    }
+  ],
+  "edges": [
+    {
+      "source": "companies/baxter-international",
+      "relation": "COUNTS_TOWARD",
+      "target": "exposure/accum-puerto-rico"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "COUNTS_TOWARD",
+      "target": "exposure/accum-puerto-rico"
+    },
+    {
+      "source": "exposure/baxter-aibonito-pr",
+      "relation": "COUNTS_TOWARD",
+      "target": "exposure/accum-puerto-rico"
+    },
+    {
+      "source": "exposure/goya-bayamon-pr",
+      "relation": "COUNTS_TOWARD",
+      "target": "exposure/accum-puerto-rico"
+    },
+    {
+      "source": "exposure/accum-puerto-rico",
+      "relation": "CAPPED_BY",
+      "target": "ike/puerto-rico-cat"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "COUNTS_TOWARD",
+      "target": "exposure/accum-harris-county"
+    },
+    {
+      "source": "exposure/texwin-houston-whse",
+      "relation": "COUNTS_TOWARD",
+      "target": "exposure/accum-harris-county"
+    },
+    {
+      "source": "exposure/accum-harris-county",
+      "relation": "CAPPED_BY",
+      "target": "ike/harris-county-accumulation"
+    },
+    {
+      "source": "companies/baxter-international",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/baxter-round-lake"
+    },
+    {
+      "source": "exposure/baxter-round-lake",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-life-sciences"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/goya-san-antonio-dc"
+    },
+    {
+      "source": "exposure/goya-san-antonio-dc",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/texwin-san-antonio-whse"
+    },
+    {
+      "source": "exposure/texwin-san-antonio-whse",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/baxter-international",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/baxter-deerfield"
+    },
+    {
+      "source": "exposure/baxter-deerfield",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-life-sciences"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/goya-secaucus"
+    },
+    {
+      "source": "exposure/goya-secaucus",
+      "relation": "GOVERNED_BY",
+      "target": "ike/coastal-named-storm"
+    },
+    {
+      "source": "exposure/goya-secaucus",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/axium-newark-dc"
+    },
+    {
+      "source": "exposure/axium-newark-dc",
+      "relation": "GOVERNED_BY",
+      "target": "ike/coastal-named-storm"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/axium-elk-grove-plant"
+    },
+    {
+      "source": "exposure/axium-elk-grove-plant",
+      "relation": "GOVERNED_BY",
+      "target": "ike/hazard-cold-storage"
+    },
+    {
+      "source": "exposure/axium-elk-grove-plant",
+      "relation": "GOVERNED_BY",
+      "target": "ike/hazard-cooking-fryer"
+    },
+    {
+      "source": "exposure/axium-elk-grove-plant",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-food-processing"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/texwin-houston-whse"
+    },
+    {
+      "source": "exposure/texwin-houston-whse",
+      "relation": "GOVERNED_BY",
+      "target": "ike/flood-zone-ae"
+    },
+    {
+      "source": "exposure/texwin-houston-whse",
+      "relation": "GOVERNED_BY",
+      "target": "ike/harris-county-accumulation"
+    },
+    {
+      "source": "exposure/texwin-houston-whse",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/goya-bayamon-pr"
+    },
+    {
+      "source": "exposure/goya-bayamon-pr",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-food-processing"
+    },
+    {
+      "source": "exposure/goya-bayamon-pr",
+      "relation": "GOVERNED_BY",
+      "target": "ike/puerto-rico-cat"
+    },
+    {
+      "source": "companies/baxter-international",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/baxter-aibonito-pr"
+    },
+    {
+      "source": "exposure/baxter-aibonito-pr",
+      "relation": "GOVERNED_BY",
+      "target": "ike/puerto-rico-cat"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "HAS_LOCATION",
+      "target": "exposure/texwin-dallas-whse"
+    },
+    {
+      "source": "exposure/texwin-dallas-whse",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "GOVERNED_BY",
+      "target": "ike/flood-zone-ae"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-warehouse"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/coastal-named-storm"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/coastal-named-storm"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "GOVERNED_BY",
+      "target": "ike/harris-county-accumulation"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/hazard-cooking-fryer"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/hazard-cold-storage"
+    },
+    {
+      "source": "companies/baxter-international",
+      "relation": "GOVERNED_BY",
+      "target": "ike/puerto-rico-cat"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/puerto-rico-cat"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/product-contamination-recall"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/product-contamination-recall"
+    },
+    {
+      "source": "companies/texwin-acquisitions",
+      "relation": "GOVERNED_BY",
+      "target": "ike/thin-named-insured"
+    },
+    {
+      "source": "companies/axium-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-food-processing"
+    },
+    {
+      "source": "companies/goya-foods",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-food-processing"
+    },
+    {
+      "source": "companies/baxter-international",
+      "relation": "GOVERNED_BY",
+      "target": "ike/occupancy-life-sciences"
+    }
+  ]
+}
