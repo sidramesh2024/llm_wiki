@@ -7,6 +7,8 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
+from google.adk.tools.tool_context import ToolContext
+
 _GRAPH_PATH = Path(__file__).with_name("graph.json")
 _WORD = re.compile(r"[a-z0-9]{4,}")
 _GENERIC = {
@@ -84,19 +86,9 @@ def _forward(node_id: str, edges: list[dict], location_seeds: set[str]) -> list[
     return found
 
 
-def expand_graph(query: str) -> dict:
-    """Expand the underwriting ontology around entities named in the question.
-
-    Returns matching Account, Location, Accumulation, and Guideline nodes,
-    the typed edges between them, and a short excerpt of each document.
-    A named location does not pull sibling sites or other accounts that share
-    a guideline.
-
-    Args:
-        query: The user question, or a short entity name such as a city or insured.
-    """
+def seeds_for(query: str) -> list[dict]:
+    """Return ontology nodes named by the question, before any hop."""
     graph = _graph()
-    nodes = {node["id"]: node for node in graph["nodes"]}
     query_l = _norm(query)
     mentioned = {
         token
@@ -119,7 +111,23 @@ def expand_graph(query: str) -> dict:
             return bool(hits & place_tokens)
         return True
 
-    seeds = [node for node in graph["nodes"] if _is_seed(node)]
+    return [node for node in graph["nodes"] if _is_seed(node)]
+
+
+def expand_graph(query: str, tool_context: ToolContext | None = None) -> dict:
+    """Expand the underwriting ontology around entities named in the question.
+
+    Returns matching Account, Location, Accumulation, and Guideline nodes,
+    the typed edges between them, and a short excerpt of each document.
+    A named location does not pull sibling sites or other accounts that share
+    a guideline. The neighborhood is merged into the session context graph.
+
+    Args:
+        query: The user question, or a short entity name such as a city or insured.
+    """
+    graph = _graph()
+    nodes = {node["id"]: node for node in graph["nodes"]}
+    seeds = seeds_for(query)
     if not seeds:
         return {
             "seeds": [],
@@ -162,7 +170,7 @@ def expand_graph(query: str) -> dict:
         if edge["source"] in kept and edge["target"] in kept
     ]
     ordered = [nodes[node_id] for node_id in kept]
-    return {
+    result = {
         "seeds": [node["title"] for node in seeds],
         "nodes": [
             {
@@ -180,3 +188,8 @@ def expand_graph(query: str) -> dict:
             for edge in edges
         ],
     }
+    if tool_context is not None:
+        from .context_graph import remember_expansion
+
+        remember_expansion(tool_context, result)
+    return result

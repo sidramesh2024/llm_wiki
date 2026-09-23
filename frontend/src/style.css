@@ -5,6 +5,7 @@
   --line: #d9d0c1;
   --card: #fffdf8;
   --knowledge: #1f6b4a;
+  --context: #245c6b;
   --web: #8a5a12;
   --mixed: #3d4f7c;
   --danger: #8c2f2f;
@@ -92,6 +93,7 @@ main {
   color: white;
 }
 .tag.knowledge { background: var(--knowledge); }
+.tag.context { background: var(--context); }
 .tag.web { background: var(--web); }
 .tag.mixed { background: var(--mixed); }
 .tag.error { background: var(--danger); }

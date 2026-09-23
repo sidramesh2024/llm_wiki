@@ -28,12 +28,14 @@ Cloud Run  uw-chat-api          FastAPI, us-central1
   v
 Agent Engine  ADK 2.8.0         gemini-2.5-flash, us-central1
   underwriting_root
+     |-- consult_context_graph -> session context_graph (fast path)
      |-- AgentTool --> knowledge_search_agent
      |                    expand_graph --------> ontology in uw_chat/graph.json
      |                    search_knowledge ----> Vertex AI Search (global)
      |                         uw-accounts      4 Account docs
      |                         uw-guidelines   11 Guideline docs
      |                         uw-exposures    13 Location + Accumulation docs
+     |                    both tools merge the neighborhood into context_graph
      |-- AgentTool --> web_search_agent
                           google_search ------> public web
 ```
@@ -134,12 +136,14 @@ Documents live in `gs://gcpexplore-487204-uw-corpus`. The three stores and the `
 
 ## ADK agent graph
 
-Package `uw_chat/`, ADK `google-adk[a2a]==2.8.0`. Every agent uses model `gemini-2.5-flash` (`MODEL` in `uw_chat/agent.py`). `mode` is unset. The root does not use `google.adk.workflow.Workflow` edges. The knowledge and web agents are `AgentTool`s, so the root model chooses the call. The instruction tells it to call knowledge first and web only when the reply starts with `NOT_IN_CORPUS`.
+Package `uw_chat/`, ADK `google-adk[a2a]==2.8.0`. Every agent uses model `gemini-2.5-flash` (`MODEL` in `uw_chat/agent.py`). `mode` is unset. The root does not use `google.adk.workflow.Workflow` edges. The knowledge and web agents are `AgentTool`s. On a new entity the root calls the knowledge agent, then the web agent only when the reply starts with `NOT_IN_CORPUS`. A follow-up already in the session context graph skips both tools.
 
 ```mermaid
 flowchart TD
-  START["user message"] --> ROOT["underwriting_root<br/>mode unset<br/>gemini-2.5-flash"]
-  ROOT -->|"AgentTool, always first"| KNOW["knowledge_search_agent<br/>expand_graph + search_knowledge"]
+  START["user message"] --> COVER{"session context graph covers the question?"}
+  COVER -->|yes| FAST["one Gemini call<br/>Source: context"]
+  COVER -->|no| ROOT["underwriting_root<br/>mode unset<br/>gemini-2.5-flash"]
+  ROOT -->|"AgentTool"| KNOW["knowledge_search_agent<br/>expand_graph + search_knowledge"]
   KNOW -->|book has the fact| ANSWER["Source: knowledge"]
   KNOW -->|NOT_IN_CORPUS| WEB["web_search_agent<br/>google_search"]
   WEB --> WEBANS["Source: web"]
@@ -149,11 +153,28 @@ flowchart TD
 
 | Agent | Name | Tools |
 |---|---|---|
-| Root | `underwriting_root` | `AgentTool(knowledge_search_agent)`, `AgentTool(web_search_agent)` |
+| Root | `underwriting_root` | `consult_context_graph`, `AgentTool(knowledge_search_agent)`, `AgentTool(web_search_agent)` |
 | Knowledge | `knowledge_search_agent` | `expand_graph`, `search_knowledge` |
 | Web | `web_search_agent` | `google_search` |
 
-Each `AgentTool` call opens a fresh in-memory session that holds only that request. The multi-turn transcript the UI shows is the root session on Agent Engine, kept by `session_id`.
+Each `AgentTool` call opens a fresh in-memory session that holds only that request. State written by `expand_graph` and `search_knowledge` is copied back onto the root session. The multi-turn transcript the UI shows is that root session, kept by `session_id`.
+
+## Context graph
+
+The knowledge graph (`uw_chat/graph.json` plus the three datastores) is the retrieval index. The context graph is the neighborhood already retrieved in this chat, stored on the Agent Engine session under `context_graph`.
+
+```mermaid
+flowchart TD
+  Q["next user question"] --> C["before_model_callback<br/>coverage check"]
+  C -->|covered| FAST["neighborhood injected<br/>retrieval tools removed<br/>Source: context"]
+  C -->|not covered| K["knowledge_search_agent"]
+  K --> E["expand_graph on the knowledge graph"]
+  E --> S["search_knowledge on Vertex AI Search"]
+  S --> SAVE["merge nodes, edges, and passages<br/>into context_graph"]
+  SAVE --> ANS["Source: knowledge"]
+```
+
+A follow-up that names the same account or location, or that names no new entity, is covered. Before the model runs, that neighborhood is written into the prompt and the retrieval tools are removed, so the turn is a single Gemini call. A question that names a new account or site is not covered: retrieval runs, then the new nodes are merged in. The stored graph is capped at 20 nodes. `consult_context_graph` remains available on retrieval turns.
 
 ## Agent Engine
 

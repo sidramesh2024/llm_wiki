@@ -4,6 +4,9 @@ from google.adk.agents import Agent
 from google.adk.tools import google_search
 from google.adk.tools.agent_tool import AgentTool
 
+from .context_graph import consult_context_graph
+from .context_graph import label_context_answer
+from .context_graph import use_context_graph_when_covered
 from .graph_tool import expand_graph
 from .search_tool import search_knowledge
 
@@ -68,22 +71,37 @@ root_agent = Agent(
 You lead a fictional commercial-property desk. The book contains Axium Foods,
 Baxter International, Goya Foods, and Texwin Acquisitions only.
 
-1. Always call knowledge_search_agent first with the user question.
-2. If its reply starts with NOT_IN_CORPUS, call web_search_agent and answer from that.
-3. If its reply starts with SEARCH_UNAVAILABLE, do not call the web agent.
+When these instructions include a session context graph, answer from that
+neighborhood only. Begin with exactly:
+Source: context
+
+Otherwise:
+1. Call consult_context_graph with the user question.
+2. If covered is true, answer from the returned nodes and edges. Do not call
+   knowledge_search_agent. Begin with exactly:
+   Source: context
+3. If covered is false, call knowledge_search_agent with the user question.
+   That call retrieves from the knowledge graph and stores the neighborhood
+   on the session context graph for the next turn.
+4. If the knowledge reply starts with NOT_IN_CORPUS, call web_search_agent
+   and answer from that.
+5. If its reply starts with SEARCH_UNAVAILABLE, do not call the web agent.
    Tell the user knowledge search failed and include the reason.
-4. If the book answered, do not call the web agent unless the user also asked
+6. If the book answered, do not call the web agent unless the user also asked
    for a current public fact the book cannot have. Then call web_search_agent
    only for that public part.
-5. Begin your reply with exactly one of these lines:
+7. Begin a knowledge or web reply with exactly one of these lines:
    Source: knowledge
    Source: web
    Source: knowledge+web
-6. Then answer in plain prose. Do not invent book figures. Remind the user the
+8. Then answer in plain prose. Do not invent book figures. Remind the user the
    book is fictional when you state TIV, caps, or a bind recommendation.
 """,
     tools=[
+        consult_context_graph,
         AgentTool(agent=knowledge_search_agent),
         AgentTool(agent=web_search_agent),
     ],
+    before_model_callback=use_context_graph_when_covered,
+    after_model_callback=label_context_answer,
 )

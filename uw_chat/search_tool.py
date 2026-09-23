@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from google.adk.tools.tool_context import ToolContext
+
 from .gcp_config import DATA_STORES, PROJECT_ID, serving_config
 
 StoreName = Literal["accounts", "guidelines", "exposures"]
@@ -22,7 +24,7 @@ def _search_client():
     return _client
 
 
-def search_knowledge(datastore: StoreName, query: str) -> dict:
+def search_knowledge(datastore: StoreName, query: str, tool_context: ToolContext | None = None) -> dict:
     """Search one Vertex AI Search datastore in the underwriting book.
 
     Args:
@@ -66,4 +68,8 @@ def search_knowledge(datastore: StoreName, query: str) -> dict:
         if chunk.document_metadata and chunk.document_metadata.title:
             title = chunk.document_metadata.title
         results.append({"title": title, "content": chunk.content[:1500]})
+    if tool_context is not None:
+        from .context_graph import remember_passages
+
+        remember_passages(tool_context, datastore, results)
     return {"status": "success", "datastore": datastore, "results": results}

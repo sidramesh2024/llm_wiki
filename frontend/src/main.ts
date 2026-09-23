@@ -1,4 +1,4 @@
-type Source = "knowledge" | "web" | "mixed" | "error";
+type Source = "knowledge" | "context" | "web" | "mixed" | "error";
 
 interface ChatResponse {
   session_id: string;

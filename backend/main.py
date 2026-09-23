@@ -145,6 +145,8 @@ def _source(answer: str, authors: list[str]) -> tuple[str, str]:
     body = "\n".join(lines[1:]).strip() if first.startswith("source:") else answer
     if "knowledge+web" in first or ("knowledge" in first and "web" in first):
         return "mixed", body
+    if first.startswith("source:") and "context" in first:
+        return "context", body
     if first.startswith("source:") and "web" in first:
         return "web", body
     if first.startswith("source:"):
