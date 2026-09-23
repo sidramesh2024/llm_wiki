@@ -161,7 +161,7 @@ Each `AgentTool` call opens a fresh in-memory session that holds only that reque
 
 ## Context graph
 
-The knowledge graph (`uw_chat/graph.json` plus the three datastores) is the retrieval index. The context graph is the neighborhood already retrieved in this chat, stored on the Agent Engine session under `context_graph`.
+The knowledge graph (`uw_chat/graph.json` plus the three datastores) is the retrieval index. The context graph is the neighborhood already retrieved in this chat, stored on the Agent Engine session under `context_graph`. Developer walkthrough: [context_graph.md](context_graph.md).
 
 ```mermaid
 flowchart TD
@@ -175,6 +175,13 @@ flowchart TD
 ```
 
 A follow-up that names the same account or location, or that names no new entity, is covered. Before the model runs, that neighborhood is written into the prompt and the retrieval tools are removed, so the turn is a single Gemini call. A question that names a new account or site is not covered: retrieval runs, then the new nodes are merged in. The stored graph is capped at 20 nodes. `consult_context_graph` remains available on retrieval turns.
+
+What the model sees is not the raw excerpt:
+
+- **Compaction.** Markdown tables and search chunks become short fact lines (TIV, zone, cap, referral).
+- **Deduplication.** A fact already contained in another fact on the same node is dropped. The longer wording is kept.
+- **Pruning.** A follow-up that names no new entity uses only the latest retrieval. Older accounts stay stored for when they are named again, and the least recent nodes are dropped after 20.
+- **Caching.** The cleaned neighborhood is stored on the session under `context_graph.cache`. The same revision and node set is reused instead of being rebuilt.
 
 ## Agent Engine
 
