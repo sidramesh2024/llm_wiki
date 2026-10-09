@@ -42,18 +42,34 @@ The browser opens http://127.0.0.1:5173. The API uses Application Default Creden
 
 ## Default avatar
 
-Set in `_live_config()`:
+The default face has a name: **Ben**. The voice paired with that face is **Puck**.
 
-| Setting | Value |
-|---|---|
-| Model | `gemini-3.8-live` |
-| Avatar | `Ben` (`AvatarConfig.avatar_name`) |
-| Voice | `Puck` (`PrebuiltVoiceConfig.voice_name`) |
-| Response modality | `VIDEO` |
+Google ships Ben as a preset. The app does not upload a photo or a `.glb` for him. `_live_config()` in `backend/main.py` asks `gemini-3.8-live` for video and passes the preset name:
 
-`VIDEO` is what turns on Live Avatar. The model returns one `video/mp4` stream. Speech is inside that stream (AAC), lip-synced to the face at 24 FPS. The page does not play a separate audio track.
+```python
+def _live_config() -> types.LiveConnectConfig:
+    return types.LiveConnectConfig(
+        response_modalities=["VIDEO"],
+        speech_config=types.SpeechConfig(
+            voice_config=types.VoiceConfig(
+                prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Puck")
+            )
+        ),
+        avatar_config=types.AvatarConfig(avatar_name="Ben"),
+        # transcription and system instruction follow
+    )
+```
 
-A custom face is a still portrait passed as `avatar_config.customized_avatar`, not a `.glb` model. Project `gcpexplore-487204` is not allowlisted for that feature, so the session uses Ben. A prepared portrait, if present, is `backend/avatar.png` and is gitignored.
+| Setting | Value | What it does |
+|---|---|---|
+| Model | `gemini-3.8-live` | Live speech-to-speech model |
+| `response_modalities` | `VIDEO` | Turns on Live Avatar and returns the talking face |
+| `avatar_name` | `Ben` | Which preset face the model draws |
+| `voice_name` | `Puck` | Which preset voice speaks with that face |
+
+`VIDEO` makes the model draw the face. `avatar_name="Ben"` chooses which face. The model returns one `video/mp4` stream. Speech is inside that stream (AAC), lip-synced to Ben at 24 FPS. The page does not play a separate audio track.
+
+A different face is a still portrait passed as `avatar_config.customized_avatar`, not a `.glb` model. Project `gcpexplore-487204` is not allowlisted for that feature, so the session stays on Ben. A prepared portrait, if present, is `backend/avatar.png` and is gitignored.
 
 ## Speech-to-speech path
 
