@@ -1,122 +1,235 @@
-type Source = "knowledge" | "context" | "web" | "mixed" | "error";
-
-interface ChatResponse {
-  session_id: string;
-  answer: string;
-  source: Source;
-  agents: string[];
-}
-
-const PROMPTS = [
-  "Can we write Texwin Acquisitions for the Houston warehouse?",
-  "What IKE articles fire for the Houston warehouse?",
-  "If we bind Baxter and Goya, do we breach the Puerto Rico cap?",
-  "What is the weather in Houston right now?",
-];
+const MIME = 'video/mp4; codecs="avc1.42C01F, mp4a.40.2"';
 
 const app = document.querySelector<HTMLDivElement>("#app");
 if (!app) throw new Error("missing #app");
 
 app.innerHTML = `
-  <aside>
-    <div class="eyebrow">Graph RAG</div>
-    <h1>Underwriting desk</h1>
-    <p>Fictional commercial-property book. The desk walks the ontology, searches three datastores, and uses the web only when the book has no answer.</p>
-    <h2>Ontology</h2>
-    <ul>
-      <li>Account <span class="store">uw-accounts</span></li>
-      <li>Guideline <span class="store">uw-guidelines</span></li>
-      <li>Location and Accumulation <span class="store">uw-exposures</span></li>
-    </ul>
-    <p class="hint">HAS_LOCATION, GOVERNED_BY, COUNTS_TOWARD, CAPPED_BY. Figures are not real submissions.</p>
-  </aside>
-  <main>
+  <section class="stage">
+    <video id="avatar" playsinline autoplay></video>
+    <p id="status">Connecting to Ben…</p>
+  </section>
+  <section class="desk">
+    <header>
+      <p class="eyebrow">Gemini 3.8 Live</p>
+      <h1>Avatar chat</h1>
+      <p class="hint">Preset avatar Ben, voice Puck. Talk, or type a line. A custom face is not required.</p>
+    </header>
     <div class="thread" id="thread"></div>
-    <div class="prompts" id="prompts"></div>
-    <form class="composer" id="form">
-      <textarea id="input" rows="2" placeholder="Ask about an account, a location, or something outside the book"></textarea>
-      <button type="submit" id="send">Send</button>
-    </form>
-  </main>
+    <div class="composer">
+      <button type="button" id="mic">Talk</button>
+      <form id="form">
+        <input id="input" placeholder="Or type a message" autocomplete="off" />
+        <button type="submit" id="send">Send</button>
+      </form>
+    </div>
+  </section>
 `;
 
+const video = document.querySelector<HTMLVideoElement>("#avatar")!;
+const statusLine = document.querySelector<HTMLParagraphElement>("#status")!;
 const thread = document.querySelector<HTMLDivElement>("#thread")!;
+const mic = document.querySelector<HTMLButtonElement>("#mic")!;
 const form = document.querySelector<HTMLFormElement>("#form")!;
-const input = document.querySelector<HTMLTextAreaElement>("#input")!;
-const send = document.querySelector<HTMLButtonElement>("#send")!;
-const prompts = document.querySelector<HTMLDivElement>("#prompts")!;
+const input = document.querySelector<HTMLInputElement>("#input")!;
 
-let sessionId: string | null = null;
-let userId = localStorage.getItem("uw-user");
-if (!userId) {
-  userId = crypto.randomUUID();
-  localStorage.setItem("uw-user", userId);
+class AvatarPlayer {
+  private media: MediaSource | null = null;
+  private buffer: SourceBuffer | null = null;
+  private queue: ArrayBuffer[] = [];
+  private opened = false;
+  private failed = false;
+
+  push(bytes: Uint8Array): void {
+    const copy = bytes.slice().buffer;
+    if (this.failed) return;
+    if (!this.media || (this.opened && isInit(bytes))) {
+      this.reset();
+    }
+    this.queue.push(copy);
+    this.pump();
+  }
+
+  private reset(): void {
+    if (this.media && this.media.readyState === "open") {
+      try {
+        this.media.endOfStream();
+      } catch {
+        /* a new stream replaces this one */
+      }
+    }
+    this.buffer = null;
+    this.opened = false;
+    this.media = new MediaSource();
+    video.src = URL.createObjectURL(this.media);
+    this.media.addEventListener("sourceopen", () => {
+      if (!this.media || this.buffer) return;
+      try {
+        this.buffer = this.media.addSourceBuffer(MIME);
+        this.buffer.mode = "sequence";
+        this.buffer.addEventListener("updateend", () => this.pump());
+        this.opened = true;
+        this.pump();
+      } catch (err) {
+        this.failed = true;
+        statusLine.textContent = err instanceof Error ? err.message : "Could not play the avatar video";
+      }
+    });
+  }
+
+  private pump(): void {
+    const buffer = this.buffer;
+    if (!buffer || buffer.updating || this.queue.length === 0) return;
+    const chunk = this.queue.shift();
+    if (!chunk) return;
+    try {
+      buffer.appendBuffer(chunk);
+      void video.play();
+    } catch (err) {
+      this.failed = true;
+      statusLine.textContent = err instanceof Error ? err.message : "Could not append avatar video";
+    }
+  }
 }
 
-function addBubble(role: "user" | "assistant", text: string, source?: Source): void {
-  const bubble = document.createElement("div");
-  bubble.className = `bubble ${role}`;
-  if (source) {
-    const tag = document.createElement("div");
-    tag.className = `tag ${source}`;
-    tag.textContent = source === "error" ? "error" : source;
-    bubble.appendChild(tag);
-  }
-  const body = document.createElement("div");
+function isInit(bytes: Uint8Array): boolean {
+  return bytes.length > 8 && bytes[4] === 0x66 && bytes[5] === 0x74 && bytes[6] === 0x79 && bytes[7] === 0x70;
+}
+
+const player = new AvatarPlayer();
+let socket: WebSocket | null = null;
+
+let ready = false;
+let listening = false;
+let audioContext: AudioContext | null = null;
+let micStream: MediaStream | null = null;
+let worklet: AudioWorkletNode | null = null;
+const openLine: { role: "user" | "model" | null; el: HTMLDivElement | null } = { role: null, el: null };
+
+function connect(): void {
+  ready = false;
+  const next = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/api/live`);
+  next.binaryType = "arraybuffer";
+  socket = next;
+  setStatus("Connecting to Ben…");
+
+  next.addEventListener("message", (event) => {
+    if (event.data instanceof ArrayBuffer) {
+      const bytes = new Uint8Array(event.data);
+      if (bytes[0] === 1) player.push(bytes.subarray(1));
+      return;
+    }
+    const payload = JSON.parse(String(event.data)) as {
+      type: string;
+      role?: "user" | "model";
+      text?: string;
+      message?: string;
+    };
+    if (payload.type === "ready") {
+      ready = true;
+      setStatus(listening ? "Listening" : "Ben is listening. Press Talk, or type a message.");
+    } else if (payload.type === "transcript" && payload.role && payload.text) {
+      appendTranscript(payload.role, payload.text);
+      setStatus(payload.role === "model" ? "Ben is speaking" : "Hearing you");
+    } else if (payload.type === "turn_complete") {
+      openLine.role = null;
+      openLine.el = null;
+      setStatus(listening ? "Listening" : "Ben is listening. Press Talk, or type a message.");
+    } else if (payload.type === "error") {
+      setStatus(payload.message || "Live session failed");
+    }
+  });
+
+  next.addEventListener("close", () => {
+    if (socket !== next) return;
+    ready = false;
+    setStatus("Reconnecting…");
+    window.setTimeout(connect, 800);
+  });
+  next.addEventListener("error", () => {
+    if (socket === next) setStatus("Reconnecting…");
+  });
+}
+
+function setStatus(text: string): void {
+  statusLine.textContent = text;
+}
+
+function addLine(role: "user" | "model", text: string): HTMLDivElement {
+  const line = document.createElement("div");
+  line.className = `line ${role}`;
+  const who = document.createElement("span");
+  who.textContent = role === "user" ? "You" : "Ben";
+  const body = document.createElement("p");
   body.textContent = text;
-  bubble.appendChild(body);
-  thread.appendChild(bubble);
+  line.append(who, body);
+  thread.appendChild(line);
+  thread.scrollTop = thread.scrollHeight;
+  return line;
+}
+
+function appendTranscript(role: "user" | "model", text: string): void {
+  if (openLine.role !== role || !openLine.el) {
+    openLine.role = role;
+    openLine.el = addLine(role, text);
+    return;
+  }
+  const body = openLine.el.querySelector("p");
+  if (body) body.textContent = `${body.textContent ?? ""}${text}`;
   thread.scrollTop = thread.scrollHeight;
 }
 
-async function apiBase(): Promise<string> {
-  const response = await fetch("/config.json", { cache: "no-store" });
-  if (!response.ok) return "http://127.0.0.1:8080";
-  const config = (await response.json()) as { apiBase?: string };
-  return (config.apiBase || "http://127.0.0.1:8080").replace(/\/$/, "");
-}
-
-async function ask(message: string): Promise<void> {
-  addBubble("user", message);
-  send.disabled = true;
-  try {
-    const base = await apiBase();
-    const response = await fetch(`${base}/api/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, session_id: sessionId, user_id: userId }),
-    });
-    const payload = (await response.json()) as ChatResponse & { detail?: string };
-    if (!response.ok) {
-      const detail = typeof payload.detail === "string" ? payload.detail : response.statusText;
-      addBubble("assistant", detail, "error");
-      return;
-    }
-    sessionId = payload.session_id;
-    addBubble("assistant", payload.answer, payload.source);
-  } catch (err) {
-    addBubble("assistant", err instanceof Error ? err.message : "request failed", "error");
-  } finally {
-    send.disabled = false;
-    input.focus();
-  }
-}
-
-for (const prompt of PROMPTS) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.textContent = prompt;
-  button.addEventListener("click", () => {
-    input.value = prompt;
-    void ask(prompt);
+async function startMic(): Promise<void> {
+  micStream = await navigator.mediaDevices.getUserMedia({
+    audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
   });
-  prompts.appendChild(button);
+  audioContext = new AudioContext();
+  await audioContext.audioWorklet.addModule("/pcm-worklet.js");
+  const source = audioContext.createMediaStreamSource(micStream);
+  worklet = new AudioWorkletNode(audioContext, "pcm-downsampler");
+  worklet.port.onmessage = (event: MessageEvent<ArrayBuffer>) => {
+    if (socket?.readyState === WebSocket.OPEN) socket.send(event.data);
+  };
+  source.connect(worklet);
+  listening = true;
+  mic.textContent = "Stop";
+  setStatus("Listening");
 }
+
+function stopMic(): void {
+  listening = false;
+  worklet?.disconnect();
+  worklet = null;
+  micStream?.getTracks().forEach((track) => track.stop());
+  micStream = null;
+  void audioContext?.close();
+  audioContext = null;
+  if (socket?.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify({ type: "audio_end" }));
+  }
+  mic.textContent = "Talk";
+  setStatus("Ben is listening. Press Talk, or type a message.");
+}
+
+mic.addEventListener("click", () => {
+  void video.play();
+  if (!ready) return;
+  if (listening) stopMic();
+  else void startMic().catch((err: unknown) => setStatus(err instanceof Error ? err.message : "Microphone blocked"));
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const message = input.value.trim();
-  if (!message || send.disabled) return;
+  const text = input.value.trim();
+  if (!text || !ready || socket?.readyState !== WebSocket.OPEN) return;
+  void video.play();
   input.value = "";
-  void ask(message);
+  openLine.role = null;
+  openLine.el = null;
+  addLine("user", text);
+  openLine.role = null;
+  openLine.el = null;
+  socket?.send(JSON.stringify({ type: "text", text }));
+  setStatus("Ben is answering");
 });
+
+connect();

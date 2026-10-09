@@ -9,5 +9,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
+backend/avatar.png
 .adk/
 .DS_Store
