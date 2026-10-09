@@ -106,6 +106,26 @@ sequenceDiagram
 
 If the socket closes, the page waits 800 ms and calls `connect()` again. That opens a new Live session. It does not resume the previous one.
 
+## Continuous speech
+
+Continuous speech means the person can keep talking, pause, and talk over Ben without pressing Talk again, and Ben’s voice does not restart on every sentence.
+
+What already works:
+
+- One Live session stays open. `model_to_browser` calls `session.receive()` again after each `turn_complete`.
+- While **Talk** is on, the worklet sends PCM continuously, about 100 ms at a time. The client does not wait for a full sentence.
+- Automatic activity detection is left on. The server, not the page, decides when the person has stopped speaking and Ben should answer.
+- The default activity handling is `START_OF_ACTIVITY_INTERRUPTS`, so speech that arrives while Ben is talking can cut him off.
+
+What still has to be done:
+
+1. **Leave the microphone open.** Today **Stop** sends `{ "type": "audio_end" }`, and the API forwards `audio_stream_end`. That ends the audio stream. The next utterance needs **Talk** again. For a continuous conversation, send `audio_stream_end` only when the person leaves. Do not send it between turns.
+2. **Keep server-side voice detection.** Do not set `automatic_activity_detection.disabled`. Tune `silence_duration_ms` on `RealtimeInputConfig` so a breath does not end the turn, and `prefix_padding_ms` so a short phrase still counts as speech. A larger silence window waits longer before Ben replies.
+3. **Keep the mic open while Ben speaks.** Barge-in only works if PCM is still flowing. Echo cancellation is already requested on `getUserMedia`. Headphones are the reliable way to stop Ben’s speaker audio from coming back in as a new user turn.
+4. **Append video instead of restarting it.** `AvatarPlayer` calls `reset()` when a chunk begins with `ftyp`. That tears down the `<video>` element and clips the previous sentence. Append later media segments to the same SourceBuffer. Reset only when a new init segment cannot be appended.
+5. **Reconnect only when the socket dies.** `turn_complete` must not close the WebSocket. A reconnect calls `connect()` and opens a blank Live session, so Ben no longer has the earlier turns. Resume with the server’s session handle if the socket has to come back.
+6. **Use the mic alone while it is open.** A typed line on the same socket (`send_realtime_input(text=...)`) can split the live turn. During continuous speech, keep text input off until **Stop**.
+
 ## Where the answer comes from
 
 Ben’s reply is the model’s own generation for that turn. `_live_config()` does not attach `search_knowledge`, `expand_graph`, Vertex AI Search, or the session context graph. The system instruction only asks for a short spoken answer:
