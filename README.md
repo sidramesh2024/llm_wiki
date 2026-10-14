@@ -115,7 +115,7 @@ sequenceDiagram
 
 ## Knowledge graph RAG
 
-The book is the OKF markdown in `okf/`. `scripts/provision_search.py` types each page and writes `uw_chat/graph.json` (28 nodes, 52 edges). Snapshots in `okf/syntheses/` are left out so the join is rebuilt at question time. The ontology write-up is `ontology/underwriting.md`.
+The book is the OKF markdown in `okf/`. `scripts/provision_search.py` types each page and writes `uw_chat/graph.json` (28 nodes, 52 edges). Snapshots in `okf/syntheses/` are left out so the join is rebuilt at question time. The ontology write-up is [`ontology/underwriting.md`](ontology/underwriting.md). What an ontology is, and whether to define it by hand or with an LLM: [`ontology/README.md`](ontology/README.md).
 
 | Type | Datastore | Id pattern | Count |
 |---|---|---|---|

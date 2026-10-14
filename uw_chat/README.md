@@ -2,7 +2,7 @@
 
 How FastAPI, Neo4j, the knowledge search agent, session context, and Vertex AI Search (Discovery Engine) work together for the underwriting desk.
 
-The graph holds **neighborhood + ref doc ids**. Discovery Engine holds **IKE and exposure text**. FastAPI is the chat gateway that keeps one `session_id` so that neighborhood stays loaded across turns.
+The graph holds **neighborhood + ref doc ids**. Discovery Engine holds **IKE and exposure text**. FastAPI is the chat gateway that keeps one `session_id` so that neighborhood stays loaded across turns. Types and allowed edges: [ontology/README.md](../ontology/README.md).
 
 **All underwriting figures are fictional.**
 

@@ -1,5 +1,7 @@
 # Commercial property underwriting ontology
 
+What an ontology is, why this desk needs one, and whether to write types by hand or let an LLM propose them: [README.md](README.md).
+
 Use case: a chatbot for a fictional commercial-property desk. The underwriter asks whether an account can be written, which guidelines fire at a location, and whether an accumulation breaches its cap. Every figure in the book is fictional. Questions the book does not contain (news, weather, public company facts) go to web search.
 
 ## Entity types
