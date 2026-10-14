@@ -8,13 +8,13 @@ Run them side by side:
 
 ```bash
 pip install -r requirements.txt
-./scripts/start_neo4j.sh
-python3 -m graph_rag.load
+./scripts/start_neo4j.sh          # Docker Neo4j + load OKF
 python3 -m graph_rag "Can we write Texwin Acquisitions for the Houston warehouse?"
 python3 -m graph_rag "What IKE articles fire for the Houston warehouse?"
+adk web uw_chat                   # first turn loads the account into session context
 ```
 
-Neo4j Browser: [http://127.0.0.1:7474](http://127.0.0.1:7474) — user `neo4j`, password `llmwiki1` (local only). Stop with `$HOME/.local/neo4j/neo4j-community-5.26.30/bin/neo4j stop`.
+Neo4j Browser: [http://127.0.0.1:7474](http://127.0.0.1:7474) — user `neo4j`, password `llmwiki1` (local only). Stop with `docker compose down`.
 
 ---
 

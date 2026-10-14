@@ -9,7 +9,7 @@ All underwriting figures are fictional.
 | | Knowledge graph | Context graph |
 |---|---|---|
 | Role | Retrieval index | Working set for this chat |
-| Where it lives | `uw_chat/graph.json` plus three Vertex AI Search datastores | Agent Engine session state, key `context_graph` |
+| Where it lives | Docker Neo4j (OKF wiki) when Bolt is up, else `uw_chat/graph.json`, plus three Vertex AI Search datastores | Agent Engine / ADK session state, key `context_graph` |
 | Lifetime | Rebuilt by `scripts/provision_search.py` | One `session_id` |
 | What a node holds | Id, label, title, datastore, article id, markdown excerpt | Id, label, title, datastore, article id, compacted `facts`, `focus` |
 | Who reads it | `knowledge_search_agent` via `expand_graph` and `search_knowledge` | Root agent, before the model call, via `use_context_graph_when_covered` |
@@ -73,6 +73,8 @@ Discovery Engine is `global`, collection `default_collection`, project `gcpexplo
 ## How a knowledge-graph retrieval runs
 
 This path runs when the context graph does not cover the question. The root calls `knowledge_search_agent`. That agent must call `expand_graph` with the user question, then `search_knowledge` once per datastore that owns a returned node. The query for search is the node title. It also searches the datastore that matches the question when `expand_graph` missed it.
+
+When the question names an account, or a location that belongs to one, `expand_graph` walks **Neo4j** (Docker or local Bolt) and loads that **full account** into the session: every location, guideline, and accumulation. Sibling sites such as Dallas are stored on the first Houston turn so later questions stay on `Source: context`. Shared guidelines are not walked into another book. If Bolt is down, the same walk uses `uw_chat/graph.json`.
 
 ### 1. Seed the nodes named in the question
 

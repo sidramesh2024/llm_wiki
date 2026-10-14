@@ -24,6 +24,24 @@ def _search_client():
     return _client
 
 
+def _neo4j_search(datastore: str, query: str, tool_context: ToolContext | None) -> dict | None:
+    from .neo4j_store import is_available, search_datastore
+
+    if not is_available():
+        return None
+    results = search_datastore(datastore, query)
+    if tool_context is not None:
+        from .context_graph import remember_passages
+
+        remember_passages(tool_context, datastore, results)
+    return {
+        "status": "success",
+        "datastore": datastore,
+        "results": results,
+        "source": "neo4j",
+    }
+
+
 def search_knowledge(datastore: StoreName, query: str, tool_context: ToolContext | None = None) -> dict:
     """Search one Vertex AI Search datastore in the underwriting book.
 
@@ -39,10 +57,12 @@ def search_knowledge(datastore: StoreName, query: str, tool_context: ToolContext
             "error_message": "datastore must be accounts, guidelines, or exposures",
         }
     try:
-        from google.api_core.exceptions import GoogleAPICallError
         from google.cloud import discoveryengine_v1beta as discoveryengine
     except Exception as exc:  # pragma: no cover - import guard for the runtime image
-        return {"status": "error", "error_message": str(exc)}
+        return _neo4j_search(datastore, query, tool_context) or {
+            "status": "error",
+            "error_message": str(exc),
+        }
 
     spec_cls = discoveryengine.SearchRequest.ContentSearchSpec
     request = discoveryengine.SearchRequest(
@@ -56,8 +76,12 @@ def search_knowledge(datastore: StoreName, query: str, tool_context: ToolContext
     )
     try:
         response = _search_client().search(request)
-    except GoogleAPICallError as exc:
-        return {"status": "error", "datastore": datastore, "error_message": str(exc)}
+    except Exception as exc:
+        return _neo4j_search(datastore, query, tool_context) or {
+            "status": "error",
+            "datastore": datastore,
+            "error_message": str(exc),
+        }
 
     results = []
     for item in response.results:

@@ -16,6 +16,13 @@ URI = os.environ.get("NEO4J_URI", "bolt://127.0.0.1:7687")
 USER = os.environ.get("NEO4J_USER", "neo4j")
 PASSWORD = os.environ.get("NEO4J_PASSWORD", "llmwiki1")
 
+STORE_BY_LABEL = {
+    "Account": "accounts",
+    "Guideline": "guidelines",
+    "Location": "exposures",
+    "Accumulation": "exposures",
+}
+
 # Canonical direction only. Reverse markdown links are flipped into these.
 REL = {
     ("Account", "Location"): "HAS_LOCATION",
@@ -69,7 +76,8 @@ def load() -> None:
                   name: $name,
                   type: $type,
                   body: $body,
-                  article_id: $article_id
+                  article_id: $article_id,
+                  datastore: $datastore
                 }})
                 """,
                 id=c["id"],
@@ -77,6 +85,7 @@ def load() -> None:
                 type=c["type"],
                 body=c["body"][:4000],
                 article_id=c.get("article_id") or "",
+                datastore=STORE_BY_LABEL[label],
             )
 
         seen: set[tuple[str, str, str]] = set()

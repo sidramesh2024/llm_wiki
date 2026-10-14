@@ -30,7 +30,11 @@ Datastores:
 Relations you may cite: HAS_LOCATION, GOVERNED_BY, COUNTS_TOWARD, CAPPED_BY.
 
 For every question:
-1. Call expand_graph with the user question.
+1. Call expand_graph with the user question. That walks Neo4j (the LLM-wiki
+   graph) and loads the full named-insured neighborhood into the session
+   context graph: locations, IKE articles, and accumulations. Later turns
+   in this chat reuse that context; you are not called again unless a new
+   account is named.
 2. Call search_knowledge once per datastore that owns a returned node.
    Use the node title as the query. Also search the datastore that matches
    the question even if expand_graph missed it.
@@ -81,8 +85,9 @@ Otherwise:
    knowledge_search_agent. Begin with exactly:
    Source: context
 3. If covered is false, call knowledge_search_agent with the user question.
-   That call retrieves from the knowledge graph and stores the neighborhood
-   on the session context graph for the next turn.
+   That call traverses Neo4j for the named account, loads the neighborhood
+   onto the session context graph, and answers this turn from the book.
+   Remaining questions about that account use the loaded context.
 4. If the knowledge reply starts with NOT_IN_CORPUS, call web_search_agent
    and answer from that.
 5. If its reply starts with SEARCH_UNAVAILABLE, do not call the web agent.

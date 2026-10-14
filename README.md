@@ -8,6 +8,8 @@ Live chat: https://uw-chat-web-1097847958671.us-central1.run.app
 
 API: https://uw-chat-api-1097847958671.us-central1.run.app
 
+Graph RAG chat path (FastAPI session → Neo4j neighborhood → context on turn 2 → Discovery Engine by ref doc id): [uw_chat/README.md](uw_chat/README.md).
+
 ## What runs where
 
 ```
@@ -30,8 +32,10 @@ Agent Engine  ADK 2.8.0         gemini-2.5-flash, us-central1
   underwriting_root
      |-- consult_context_graph -> session context_graph (fast path)
      |-- AgentTool --> knowledge_search_agent
-     |                    expand_graph --------> ontology in uw_chat/graph.json
-     |                    search_knowledge ----> Vertex AI Search (global)
+     |                    expand_graph --------> Neo4j (Docker) when Bolt is up,
+     |                                           else ontology in uw_chat/graph.json
+     |                    search_knowledge ----> Vertex AI Search (global),
+     |                                           Neo4j node text if Search is down
      |                         uw-accounts      4 Account docs
      |                         uw-guidelines   11 Guideline docs
      |                         uw-exposures    13 Location + Accumulation docs
@@ -301,16 +305,31 @@ Suggested prompts in the page include the Houston warehouse question and "What i
 cd frontend && npm install && npm run build
 ```
 
-## Local wiki and Neo4j
+## Local wiki, Docker Neo4j, and ADK
 
-The same OKF bundle still drives the local LLM-wiki graph and the Neo4j example. Those paths do not call Agent Engine.
+The OKF bundle is the source of truth. Docker Neo4j holds the typed graph. The ADK desk (`uw_chat`) walks that graph on the **first turn** for the named account and stores the neighborhood on the session. Later questions in the same chat are answered from that context (`Source: context`) without traversing again.
+
+```bash
+pip install -r requirements.txt -r uw_chat/requirements.txt
+chmod +x scripts/start_neo4j.sh
+./scripts/start_neo4j.sh          # docker compose up neo4j + load okf/
+export NEO4J_URI=bolt://127.0.0.1:7687 NEO4J_PASSWORD=llmwiki1
+adk web uw_chat
+```
+
+If Docker says permission denied on `/var/run/docker.sock`, grant access once (`sudo usermod -aG docker $USER`, then `newgrp docker`) and re-run `./scripts/start_neo4j.sh`. Until then the script starts the local Neo4j tarball so the ADK desk still has a graph.
+
+First turn: `Can we write Texwin Acquisitions for the Houston warehouse?`  
+Follow-up: `Does that breach the Harris County cap?` (session already has Texwin).
+
+Neo4j Browser: http://127.0.0.1:7474 — user `neo4j`, password `llmwiki1`. Stop with `docker compose down`.
 
 ```
 okf/                  # OKF bundle (markdown concepts + links)
 graph/                # LLM-wiki knowledge graph (SVG + interactive HTML)
-graph_rag/            # Neo4j Graph RAG example
+graph_rag/            # loads OKF into Neo4j
 adk_underwriting/     # local ADK router + company / IKE / exposure specialists
-uw_chat/              # ADK 2.8 desk deployed to Agent Engine
+uw_chat/              # ADK 2.8 desk (Neo4j first turn, session context after)
 backend/              # FastAPI
 frontend/             # TypeScript UI
 ontology/             # underwriting ontology
@@ -322,17 +341,10 @@ Wiki pages are nodes. Markdown links are edges. Color is page type.
 
 ```bash
 python3 scripts/build_graph.py   # regenerates graph/ from okf/
-pip install -r requirements.txt
 adk web adk_underwriting
 ```
 
-Side-by-side with Neo4j: [graph_rag/README.md](graph_rag/README.md).
-
-```bash
-./scripts/start_neo4j.sh
-python3 -m graph_rag.load
-python3 -m graph_rag "Can we write Texwin Acquisitions for the Houston warehouse?"
-```
+Side-by-side Graph RAG notes: [graph_rag/README.md](graph_rag/README.md).
 
 
 ## Layout
