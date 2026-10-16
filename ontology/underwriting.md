@@ -24,6 +24,26 @@ Compiled UW snapshots (`syntheses/*`) are not in the ontology. Graph RAG rebuild
 | `COUNTS_TOWARD` | Account or Location | Accumulation | Exposure that adds into an aggregate |
 | `CAPPED_BY` | Accumulation | Guideline | Article that states the aggregate cap |
 
+## Knowledge-layer hierarchy
+
+The Neo4j graph is stacked like Neo4j’s [knowledge layer](https://neo4j.com/blog/agentic-ai/knowledge-layer/): source documents at the bottom, typed entities in the middle, decision traces and communities on top.
+
+| Level | Node labels | Meaning |
+|---|---|---|
+| 0 | `Document`, `Chunk` | IKE / exposure / account source text (`HAS_CHUNK`, `NEXT_CHUNK`, `MENTIONS`) |
+| 1 | `Account`, `Location`, `Guideline`, `Accumulation` | Canonical knowledge graph |
+| 2 | `DecisionTrace`, `Community` | UW snapshots (policies applied, cited sites) and theme communities |
+| 3 | `KnowledgeLayer` | Root. `CONTAINS` down the tree |
+
+Communities use GraphRAG-style parent links: `IN_COMMUNITY`, `PARENT_COMMUNITY` (level 1 themes under the level 2 property book). Decision traces use `ABOUT_ACCOUNT`, `APPLIED_POLICY`, `CITED` so an agent can show *why* a referral was recommended, not only which nodes exist.
+
+In Neo4j Browser:
+
+```cypher
+MATCH path = (:KnowledgeLayer {id: 'layer/uw-desk'})-[:CONTAINS*1..4]->(n)
+RETURN path
+```
+
 ## How a question is answered
 
 1. Link names in the question to Account, Location, Accumulation, or Guideline nodes.

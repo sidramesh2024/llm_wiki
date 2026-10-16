@@ -9,8 +9,10 @@ from pathlib import Path
 from neo4j import GraphDatabase
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "adk_underwriting"))
 from tools import load_bundle  # noqa: E402
+from graph_rag.hierarchy import attach as attach_hierarchy  # noqa: E402
 
 URI = os.environ.get("NEO4J_URI", "bolt://127.0.0.1:7687")
 USER = os.environ.get("NEO4J_USER", "neo4j")
@@ -121,6 +123,7 @@ def load() -> None:
             )
         }
         rels = session.run("MATCH ()-[r]->() RETURN count(r) AS n").single()["n"]
+        hierarchy = attach_hierarchy(session, bundle, _label)
     driver.close()
     print(
         "loaded Graph RAG store:",
@@ -128,7 +131,11 @@ def load() -> None:
         f"{label_counts.get('Guideline', 0)} guidelines,",
         f"{label_counts.get('Location', 0)} locations,",
         f"{label_counts.get('Accumulation', 0)} accumulations,",
-        f"{rels} typed relationships",
+        f"{hierarchy['documents']} documents,",
+        f"{hierarchy['chunks']} chunks,",
+        f"{hierarchy['communities']} communities,",
+        f"{hierarchy['decision_traces']} decision traces,",
+        f"{rels} typed entity relationships",
     )
 
 

@@ -31,14 +31,26 @@ See [okf/companies/texwin-acquisitions.md](../okf/companies/texwin-acquisitions.
 
 ### Graph RAG (this package + Neo4j)
 
-- **Nodes** are typed: `Account`, `Location`, `Guideline`, `Accumulation`.
+- **Nodes** are typed and **layered** (Neo4j [knowledge layer](https://neo4j.com/blog/agentic-ai/knowledge-layer/)):
+  - level 0: `Document` / `Chunk` (source text)
+  - level 1: `Account`, `Location`, `Guideline`, `Accumulation`
+  - level 2: `DecisionTrace` (UW snapshot), `Community` (theme, with `PARENT_COMMUNITY`)
 - **Edges** are typed:
 
 ```
 (:Account)-[:HAS_LOCATION]->(:Location)-[:GOVERNED_BY]->(:Guideline)
 (:Location)-[:COUNTS_TOWARD]->(:Accumulation)-[:CAPPED_BY]->(:Guideline)
-(:Account)-[:GOVERNED_BY]->(:Guideline)
-(:Account)-[:COUNTS_TOWARD]->(:Accumulation)
+(:Account)-[:CONTAINS]->(:Location)
+(:Account)-[:HAS_DECISION]->(:DecisionTrace)-[:APPLIED_POLICY]->(:Guideline)
+(:Community)-[:PARENT_COMMUNITY]->(:Community)
+(:Document)-[:HAS_CHUNK]->(:Chunk)-[:MENTIONS]->(:Account|:Location|:Guideline)
+```
+
+In Neo4j Browser, the tree is:
+
+```cypher
+MATCH path = (:KnowledgeLayer)-[:CONTAINS*1..4]->(n)
+RETURN path
 ```
 
 - **Query path:** cheap entity link on the question (`houston`, `texwin`, …) → start at the best-matching label (a **Location** if a city is present, otherwise an **Account**) → schema-aware Cypher → node text into an LLM.

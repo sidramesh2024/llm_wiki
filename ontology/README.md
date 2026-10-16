@@ -33,6 +33,18 @@ Neo4j                   nodes + typed edges + ref_doc_id
 query                   match names → walk only allowed edges → fetch those docs
 ```
 
+The Neo4j store is **hierarchical**, in the sense of Neo4j’s [knowledge layer](https://neo4j.com/blog/agentic-ai/knowledge-layer/): not a flat bag of pages.
+
+```
+KnowledgeLayer                         (root)
+  ├── Layer 0  Document → Chunk        source text (IKE, exposure, application)
+  ├── Layer 1  Account → Location      knowledge graph (policies, accumulations)
+  └── Layer 2  DecisionTrace           why a referral was made; Community themes
+                Community ──PARENT──► property book
+```
+
+The loan-officer picture in that post is the same shape: the assistant cites risk factors, the **context graph** holds causal links (this site counts toward this cap), and the **decision trace** records which policies were applied. UW snapshots in `okf/syntheses/` become `DecisionTrace` nodes (`ABOUT_ACCOUNT`, `APPLIED_POLICY`, `CITED`). Theme groups (food processing, Puerto Rico CAT, Harris County) are `Community` nodes so a global question can start at a parent instead of one account.
+
 ---
 
 ## How it is useful on this desk

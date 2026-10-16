@@ -72,11 +72,13 @@ knowledge_search_agent
 
 ### What `expand_graph` loads
 
-Typed walk from the named insured (or the account that owns a named location):
+Typed walk from the named insured (or the account that owns a named location), including the knowledge-layer tree (communities, decision traces, source documents):
 
 ```
 (:Account)-[:HAS_LOCATION]->(:Location)-[:GOVERNED_BY]->(:Guideline)
 (:Location)-[:COUNTS_TOWARD]->(:Accumulation)-[:CAPPED_BY]->(:Guideline)
+(:Account)-[:HAS_DECISION]->(:DecisionTrace)-[:APPLIED_POLICY]->(:Guideline)
+(:Account)-[:IN_COMMUNITY]->(:Community)-[:PARENT_COMMUNITY]->(:Community)
 ```
 
 Example neighborhood after Houston / Texwin:

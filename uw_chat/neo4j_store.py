@@ -30,6 +30,10 @@ OPTIONAL MATCH (loc)-[:GOVERNED_BY]->(lg:Guideline)
 OPTIONAL MATCH (loc)-[:COUNTS_TOWARD]->(lacc:Accumulation)
 OPTIONAL MATCH (aacc)-[:CAPPED_BY]->(acap:Guideline)
 OPTIONAL MATCH (lacc)-[:CAPPED_BY]->(lcap:Guideline)
+OPTIONAL MATCH (acct)-[:HAS_DECISION]->(trace:DecisionTrace)
+OPTIONAL MATCH (acct)-[:IN_COMMUNITY]->(comm:Community)
+OPTIONAL MATCH (comm)-[:PARENT_COMMUNITY]->(book:Community)
+OPTIONAL MATCH (acct)-[:FROM_DOCUMENT]->(doc:Document)
 WITH acct,
      collect(DISTINCT loc) AS locs,
      collect(DISTINCT ag) AS ags,
@@ -37,7 +41,11 @@ WITH acct,
      collect(DISTINCT lg) AS lgs,
      collect(DISTINCT lacc) AS laccs,
      collect(DISTINCT acap) AS acaps,
-     collect(DISTINCT lcap) AS lcaps
+     collect(DISTINCT lcap) AS lcaps,
+     collect(DISTINCT trace) AS traces,
+     collect(DISTINCT comm) AS comms,
+     collect(DISTINCT book) AS books,
+     collect(DISTINCT doc) AS docs
 WITH [acct] +
      [n IN locs WHERE n IS NOT NULL] +
      [n IN ags WHERE n IS NOT NULL] +
@@ -45,10 +53,19 @@ WITH [acct] +
      [n IN lgs WHERE n IS NOT NULL] +
      [n IN laccs WHERE n IS NOT NULL] +
      [n IN acaps WHERE n IS NOT NULL] +
-     [n IN lcaps WHERE n IS NOT NULL] AS nodes
+     [n IN lcaps WHERE n IS NOT NULL] +
+     [n IN traces WHERE n IS NOT NULL] +
+     [n IN comms WHERE n IS NOT NULL] +
+     [n IN books WHERE n IS NOT NULL] +
+     [n IN docs WHERE n IS NOT NULL] AS nodes
 UNWIND nodes AS a
 UNWIND nodes AS b
 OPTIONAL MATCH (a)-[r]->(b)
+WHERE type(r) IN [
+  'HAS_LOCATION','GOVERNED_BY','COUNTS_TOWARD','CAPPED_BY',
+  'HAS_DECISION','ABOUT_ACCOUNT','APPLIED_POLICY','CITED',
+  'IN_COMMUNITY','PARENT_COMMUNITY','FROM_DOCUMENT','CONTAINS'
+]
 WITH nodes, collect(DISTINCT CASE WHEN r IS NULL THEN NULL ELSE {
   source: a.id, relation: type(r), target: b.id
 } END) AS raw
@@ -58,7 +75,8 @@ RETURN [n IN nodes | {
   title: n.name,
   datastore: n.datastore,
   article_id: n.article_id,
-  excerpt: n.body
+  excerpt: n.body,
+  level: n.level
 }] AS nodes,
 [e IN raw WHERE e IS NOT NULL] AS edges
 """
@@ -120,6 +138,7 @@ def _shape(node: dict) -> dict:
         "datastore": node.get("datastore") or _DATASTORE.get(label, ""),
         "article_id": node.get("article_id") or "",
         "excerpt": (node.get("excerpt") or "")[:2000],
+        "level": node.get("level"),
     }
 
 
@@ -128,12 +147,25 @@ def fetch_account(account_id: str) -> dict:
         rec = session.run(ACCOUNT_NEIGHBORHOOD, id=account_id).single()
     if not rec:
         return {"nodes": [], "edges": []}
-    nodes = [_shape(n) for n in rec["nodes"] if n and n.get("id")]
-    edges = [
-        {"source": e["source"], "relation": e["relation"], "target": e["target"]}
-        for e in rec["edges"]
-        if e
-    ]
+    nodes = []
+    seen_nodes: set[str] = set()
+    for n in rec["nodes"]:
+        if not n or not n.get("id") or n["id"] in seen_nodes:
+            continue
+        seen_nodes.add(n["id"])
+        nodes.append(_shape(n))
+    seen_edges: set[tuple[str, str, str]] = set()
+    edges = []
+    for e in rec["edges"]:
+        if not e:
+            continue
+        key = (e["source"], e["relation"], e["target"])
+        if key in seen_edges:
+            continue
+        seen_edges.add(key)
+        edges.append(
+            {"source": e["source"], "relation": e["relation"], "target": e["target"]}
+        )
     return {"nodes": nodes, "edges": edges}
 
 

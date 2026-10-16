@@ -139,8 +139,9 @@ def _pack(seeds: list[dict], ordered: list[dict], edges: list[dict]) -> dict:
                 "datastore": node["datastore"],
                 "article_id": node.get("article_id") or "",
                 "excerpt": node.get("excerpt") or "",
+                "level": node.get("level"),
             }
-            for node in ordered[:20]
+            for node in ordered[:24]
         ],
         "edges": [
             {"source": edge["source"], "relation": edge["relation"], "target": edge["target"]}
