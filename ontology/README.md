@@ -2,7 +2,7 @@
 
 The typed graph for this desk is not “whatever the LLM extracted this morning.” It is an **ontology**: a small, agreed list of entity types and allowed edges. Cypher, session context, and Discovery Engine tool calls all assume that list.
 
-The schema itself is [underwriting.md](underwriting.md). This note is *why it exists*, **why Graph RAG beats vector or wiki retrieval on this desk**, and whether you should write types by hand or let an agent invent them.
+The schema itself is [underwriting.md](underwriting.md). RDF/OWL TBox, SHACL, and how to build the ABox from account / IKE / exposure docs: [rdf-owl-shacl.md](rdf-owl-shacl.md) ([`uw.ttl`](uw.ttl), [`uw.shacl.ttl`](uw.shacl.ttl)). This note is *why it exists*, **why Graph RAG beats vector or wiki retrieval on this desk**, and whether you should write types by hand or let an agent invent them.
 
 **All underwriting figures are fictional.**
 

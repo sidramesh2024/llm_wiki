@@ -1,0 +1,127 @@
+@prefix uw:  <http://llmwiki.example/uw#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ABox sketch: one submission + one IKE + one location + one accum.
+# Figures are fictional. Validate: pyshacl -s uw.shacl.ttl -d texwin.example.ttl -e uw.ttl
+
+<http://llmwiki.example/uw/doc/companies/texwin-acquisitions>
+  a uw:Document ;
+  uw:name "Texwin Acquisitions LLC submission" ;
+  uw:hasChunk <http://llmwiki.example/uw/chunk/texwin-0> .
+
+<http://llmwiki.example/uw/chunk/texwin-0>
+  a uw:Chunk ;
+  uw:name "Application" ;
+  uw:mentions <http://llmwiki.example/uw/companies/texwin-acquisitions> .
+
+<http://llmwiki.example/uw/companies/texwin-acquisitions>
+  a uw:Account ;
+  uw:id "companies/texwin-acquisitions" ;
+  uw:name "Texwin Acquisitions LLC" ;
+  uw:datastore "accounts" ;
+  uw:requestedLimit 71000000 ;
+  uw:occupancy "Industrial warehouse (acquired)" ;
+  uw:formed "2025-04"^^xsd:gYearMonth ;
+  uw:fromDocument <http://llmwiki.example/uw/doc/companies/texwin-acquisitions> ;
+  uw:hasLocation <http://llmwiki.example/uw/exposure/texwin-houston-whse> ;
+  uw:governedBy <http://llmwiki.example/uw/ike/thin-named-insured> ;
+  uw:countsToward <http://llmwiki.example/uw/exposure/accum-harris-county> .
+
+<http://llmwiki.example/uw/doc/ike/flood-zone-ae>
+  a uw:Document ;
+  uw:name "IKE-UW-310 Flood zone AE" ;
+  uw:hasChunk <http://llmwiki.example/uw/chunk/ike-310-0> .
+
+<http://llmwiki.example/uw/chunk/ike-310-0>
+  a uw:Chunk ;
+  uw:name "Rule" ;
+  uw:mentions <http://llmwiki.example/uw/ike/flood-zone-ae> .
+
+<http://llmwiki.example/uw/ike/flood-zone-ae>
+  a uw:Guideline ;
+  uw:id "ike/flood-zone-ae" ;
+  uw:name "IKE-UW-310 Flood zone AE" ;
+  uw:articleId "IKE-UW-310" ;
+  uw:datastore "guidelines" ;
+  uw:fromDocument <http://llmwiki.example/uw/doc/ike/flood-zone-ae> .
+
+<http://llmwiki.example/uw/doc/ike/thin-named-insured>
+  a uw:Document ;
+  uw:name "IKE-UW-410 Thin named insured" ;
+  uw:hasChunk <http://llmwiki.example/uw/chunk/ike-410-0> .
+
+<http://llmwiki.example/uw/chunk/ike-410-0>
+  a uw:Chunk ;
+  uw:name "Rule" ;
+  uw:mentions <http://llmwiki.example/uw/ike/thin-named-insured> .
+
+<http://llmwiki.example/uw/ike/thin-named-insured>
+  a uw:Guideline ;
+  uw:id "ike/thin-named-insured" ;
+  uw:name "IKE-UW-410 Thin named insured" ;
+  uw:articleId "IKE-UW-410" ;
+  uw:datastore "guidelines" ;
+  uw:fromDocument <http://llmwiki.example/uw/doc/ike/thin-named-insured> .
+
+<http://llmwiki.example/uw/doc/ike/harris-county-accumulation>
+  a uw:Document ;
+  uw:name "IKE-UW-510 Harris County accumulation" ;
+  uw:hasChunk <http://llmwiki.example/uw/chunk/ike-510-0> .
+
+<http://llmwiki.example/uw/chunk/ike-510-0>
+  a uw:Chunk ;
+  uw:name "Rule" ;
+  uw:mentions <http://llmwiki.example/uw/ike/harris-county-accumulation> .
+
+<http://llmwiki.example/uw/ike/harris-county-accumulation>
+  a uw:Guideline ;
+  uw:id "ike/harris-county-accumulation" ;
+  uw:name "IKE-UW-510 Harris County accumulation" ;
+  uw:articleId "IKE-UW-510" ;
+  uw:datastore "guidelines" ;
+  uw:fromDocument <http://llmwiki.example/uw/doc/ike/harris-county-accumulation> .
+
+<http://llmwiki.example/uw/doc/exposure/accum-harris-county>
+  a uw:Document ;
+  uw:name "Harris County accumulation" ;
+  uw:hasChunk <http://llmwiki.example/uw/chunk/accum-harris-0> .
+
+<http://llmwiki.example/uw/chunk/accum-harris-0>
+  a uw:Chunk ;
+  uw:name "Cap" ;
+  uw:mentions <http://llmwiki.example/uw/exposure/accum-harris-county> .
+
+<http://llmwiki.example/uw/doc/exposure/texwin-houston-whse>
+  a uw:Document ;
+  uw:name "Texwin Houston warehouse" ;
+  uw:hasChunk <http://llmwiki.example/uw/chunk/houston-0> .
+
+<http://llmwiki.example/uw/chunk/houston-0>
+  a uw:Chunk ;
+  uw:name "Schedule" ;
+  uw:mentions <http://llmwiki.example/uw/exposure/texwin-houston-whse> .
+
+<http://llmwiki.example/uw/exposure/texwin-houston-whse>
+  a uw:Location ;
+  uw:id "exposure/texwin-houston-whse" ;
+  uw:name "Texwin Houston warehouse" ;
+  uw:datastore "exposures" ;
+  uw:tiv 38000000 ;
+  uw:floodZone "AE" ;
+  uw:county "Harris" ;
+  uw:milesToCoast 25 ;
+  uw:elevationCert false ;
+  uw:fromDocument <http://llmwiki.example/uw/doc/exposure/texwin-houston-whse> ;
+  uw:governedBy <http://llmwiki.example/uw/ike/flood-zone-ae> ,
+                <http://llmwiki.example/uw/ike/harris-county-accumulation> ;
+  uw:countsToward <http://llmwiki.example/uw/exposure/accum-harris-county> .
+
+<http://llmwiki.example/uw/exposure/accum-harris-county>
+  a uw:Accumulation ;
+  uw:id "exposure/accum-harris-county" ;
+  uw:name "Harris County accumulation" ;
+  uw:datastore "exposures" ;
+  uw:inForceTiv 318000000 ;
+  uw:cap 350000000 ;
+  uw:cappedBy <http://llmwiki.example/uw/ike/harris-county-accumulation> ;
+  uw:fromDocument <http://llmwiki.example/uw/doc/exposure/accum-harris-county> .

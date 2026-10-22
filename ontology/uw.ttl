@@ -1,0 +1,160 @@
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix uw:   <http://llmwiki.example/uw#> .
+
+# TBox: commercial-property underwriting. Instances come from
+# account submissions, IKE articles, and exposure docs.
+# Map: OWL class → Neo4j label, object property → relationship type.
+
+<http://llmwiki.example/uw>
+  a owl:Ontology ;
+  rdfs:label "Commercial property UW ontology" ;
+  rdfs:comment "Hand-defined contract for Graph RAG. SHACL in uw.shacl.ttl. Fictional book only." ;
+  owl:versionInfo "0.2" .
+
+# --- Knowledge-layer classes (Neo4j knowledge layer stack) ---
+
+uw:KnowledgeAsset a owl:Class ;
+  rdfs:label "Knowledge asset" ;
+  rdfs:comment "Anything the ADK agent may retrieve or cite." .
+
+uw:Document a owl:Class ; rdfs:subClassOf uw:KnowledgeAsset ;
+  rdfs:label "Document" ;
+  rdfs:comment "Source: account submission, IKE PDF/article, or exposure schedule. Layer 0." .
+
+uw:Chunk a owl:Class ; rdfs:subClassOf uw:KnowledgeAsset ;
+  rdfs:label "Chunk" ;
+  rdfs:comment "Section of a Document. Layer 0." .
+
+uw:Entity a owl:Class ; rdfs:subClassOf uw:KnowledgeAsset ;
+  rdfs:label "Entity" ;
+  rdfs:comment "Canonical knowledge-graph node. Layer 1." .
+
+uw:Account a owl:Class ; rdfs:subClassOf uw:Entity ;
+  rdfs:label "Account" ;
+  rdfs:comment "Named insured. Extracted from the account submission." .
+
+uw:Location a owl:Class ; rdfs:subClassOf uw:Entity ;
+  rdfs:label "Location" ;
+  rdfs:comment "Scheduled site. Extracted from an exposure location doc." .
+
+uw:Guideline a owl:Class ; rdfs:subClassOf uw:Entity ;
+  rdfs:label "Guideline" ;
+  rdfs:comment "IKE underwriting article. Extracted from an IKE document." .
+
+uw:Accumulation a owl:Class ; rdfs:subClassOf uw:Entity ;
+  rdfs:label "Accumulation" ;
+  rdfs:comment "In-force aggregate vs cap. Extracted from an exposure accumulation doc." .
+
+uw:DecisionTrace a owl:Class ; rdfs:subClassOf uw:KnowledgeAsset ;
+  rdfs:label "Decision trace" ;
+  rdfs:comment "Compiled UW snapshot: policies applied, sites cited. Layer 2." .
+
+uw:Community a owl:Class ; rdfs:subClassOf uw:KnowledgeAsset ;
+  rdfs:label "Community" ;
+  rdfs:comment "Theme or book grouping (GraphRAG parent communities). Layer 2." .
+
+uw:KnowledgeLayer a owl:Class ; rdfs:subClassOf uw:KnowledgeAsset ;
+  rdfs:label "Knowledge layer" ;
+  rdfs:comment "Root of the CONTAINS tree. Layer 3." .
+
+# --- Object properties (Neo4j relationship types) ---
+
+uw:hasLocation a owl:ObjectProperty ;
+  rdfs:label "HAS_LOCATION" ;
+  rdfs:domain uw:Account ; rdfs:range uw:Location ;
+  rdfs:comment "From the submission location schedule." .
+
+uw:governedBy a owl:ObjectProperty ;
+  rdfs:label "GOVERNED_BY" ;
+  rdfs:domain uw:Entity ; rdfs:range uw:Guideline ;
+  rdfs:comment "IKE that applies to this account or location." .
+
+uw:countsToward a owl:ObjectProperty ;
+  rdfs:label "COUNTS_TOWARD" ;
+  rdfs:domain uw:Entity ; rdfs:range uw:Accumulation ;
+  rdfs:comment "This TIV adds into the named aggregate." .
+
+uw:cappedBy a owl:ObjectProperty ;
+  rdfs:label "CAPPED_BY" ;
+  rdfs:domain uw:Accumulation ; rdfs:range uw:Guideline ;
+  rdfs:comment "IKE article that states the aggregate cap." .
+
+uw:fromDocument a owl:ObjectProperty ;
+  rdfs:label "FROM_DOCUMENT" ;
+  rdfs:domain uw:KnowledgeAsset ; rdfs:range uw:Document .
+
+uw:hasChunk a owl:ObjectProperty ;
+  rdfs:label "HAS_CHUNK" ;
+  rdfs:domain uw:Document ; rdfs:range uw:Chunk .
+
+uw:nextChunk a owl:ObjectProperty ;
+  rdfs:label "NEXT_CHUNK" ;
+  rdfs:domain uw:Chunk ; rdfs:range uw:Chunk .
+
+uw:mentions a owl:ObjectProperty ;
+  rdfs:label "MENTIONS" ;
+  rdfs:domain uw:Chunk ; rdfs:range uw:Entity .
+
+uw:contains a owl:ObjectProperty ;
+  rdfs:label "CONTAINS" ;
+  rdfs:comment "Knowledge-layer tree, parent to child." .
+
+uw:inCommunity a owl:ObjectProperty ;
+  rdfs:label "IN_COMMUNITY" ;
+  rdfs:range uw:Community .
+
+uw:parentCommunity a owl:ObjectProperty ;
+  rdfs:label "PARENT_COMMUNITY" ;
+  rdfs:domain uw:Community ; rdfs:range uw:Community .
+
+uw:hasDecision a owl:ObjectProperty ;
+  rdfs:label "HAS_DECISION" ;
+  rdfs:domain uw:Account ; rdfs:range uw:DecisionTrace .
+
+uw:aboutAccount a owl:ObjectProperty ;
+  rdfs:label "ABOUT_ACCOUNT" ;
+  rdfs:domain uw:DecisionTrace ; rdfs:range uw:Account .
+
+uw:appliedPolicy a owl:ObjectProperty ;
+  rdfs:label "APPLIED_POLICY" ;
+  rdfs:domain uw:DecisionTrace ; rdfs:range uw:Guideline .
+
+uw:cited a owl:ObjectProperty ;
+  rdfs:label "CITED" ;
+  rdfs:domain uw:DecisionTrace ; rdfs:range uw:Entity .
+
+# --- Datatype properties from the three source kinds ---
+
+uw:id a owl:DatatypeProperty ; rdfs:range xsd:string .
+uw:name a owl:DatatypeProperty ; rdfs:range xsd:string .
+uw:articleId a owl:DatatypeProperty ;
+  rdfs:domain uw:Guideline ; rdfs:range xsd:string ;
+  rdfs:comment "e.g. IKE-UW-310. From the IKE document." .
+uw:requestedLimit a owl:DatatypeProperty ;
+  rdfs:domain uw:Account ; rdfs:range xsd:decimal ;
+  rdfs:comment "From the account submission." .
+uw:occupancy a owl:DatatypeProperty ; rdfs:range xsd:string .
+uw:formed a owl:DatatypeProperty ;
+  rdfs:domain uw:Account ; rdfs:range xsd:gYearMonth .
+uw:tiv a owl:DatatypeProperty ;
+  rdfs:domain uw:Location ; rdfs:range xsd:decimal ;
+  rdfs:comment "Site TIV from the exposure location doc." .
+uw:floodZone a owl:DatatypeProperty ;
+  rdfs:domain uw:Location ; rdfs:range xsd:string .
+uw:county a owl:DatatypeProperty ; rdfs:range xsd:string .
+uw:milesToCoast a owl:DatatypeProperty ;
+  rdfs:domain uw:Location ; rdfs:range xsd:decimal .
+uw:elevationCert a owl:DatatypeProperty ;
+  rdfs:domain uw:Location ; rdfs:range xsd:boolean .
+uw:inForceTiv a owl:DatatypeProperty ;
+  rdfs:domain uw:Accumulation ; rdfs:range xsd:decimal .
+uw:cap a owl:DatatypeProperty ;
+  rdfs:domain uw:Accumulation ; rdfs:range xsd:decimal .
+uw:datastore a owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+  rdfs:comment "accounts | guidelines | exposures. ADK search_knowledge routing." .
+uw:level a owl:DatatypeProperty ; rdfs:range xsd:integer .
+uw:body a owl:DatatypeProperty ; rdfs:range xsd:string .

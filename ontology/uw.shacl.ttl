@@ -1,0 +1,114 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix uw:   <http://llmwiki.example/uw#> .
+
+# Instance constraints. Validate ABox RDF before Neo4j load.
+# pyshacl -s ontology/uw.shacl.ttl -d ontology/texwin.example.ttl -e ontology/uw.ttl
+
+uw:AccountShape a sh:NodeShape ;
+  sh:targetClass uw:Account ;
+  sh:property [
+    sh:path uw:id ; sh:minCount 1 ; sh:datatype xsd:string ;
+    sh:pattern "^companies/" ;
+  ] ;
+  sh:property [
+    sh:path uw:name ; sh:minCount 1 ; sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path uw:datastore ; sh:hasValue "accounts" ;
+  ] ;
+  sh:property [
+    sh:path uw:hasLocation ; sh:minCount 1 ; sh:class uw:Location ;
+    sh:message "An account submission must schedule at least one location." ;
+  ] ;
+  sh:property [
+    sh:path uw:fromDocument ; sh:minCount 1 ; sh:class uw:Document ;
+  ] ;
+  sh:property [
+    sh:path uw:requestedLimit ; sh:datatype xsd:decimal ; sh:minInclusive 0 ;
+  ] .
+
+uw:LocationShape a sh:NodeShape ;
+  sh:targetClass uw:Location ;
+  sh:property [
+    sh:path uw:id ; sh:minCount 1 ; sh:pattern "^exposure/" ;
+  ] ;
+  sh:property [
+    sh:path uw:tiv ; sh:minCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0 ;
+    sh:message "Exposure location docs must state site TIV." ;
+  ] ;
+  sh:property [
+    sh:path uw:governedBy ; sh:class uw:Guideline ;
+  ] ;
+  sh:property [
+    sh:path uw:fromDocument ; sh:minCount 1 ; sh:class uw:Document ;
+  ] ;
+  sh:property [
+    sh:path uw:datastore ; sh:hasValue "exposures" ;
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A location in flood zone AE above 10M TIV must be governedBy IKE-UW-310." ;
+    sh:select """
+      PREFIX uw: <http://llmwiki.example/uw#>
+      SELECT $this
+      WHERE {
+        $this uw:floodZone "AE" ; uw:tiv ?tiv .
+        FILTER (?tiv > 10000000)
+        FILTER NOT EXISTS { $this uw:governedBy ?g . ?g uw:articleId "IKE-UW-310" }
+      }
+    """ ;
+  ] .
+
+uw:GuidelineShape a sh:NodeShape ;
+  sh:targetClass uw:Guideline ;
+  sh:property [
+    sh:path uw:id ; sh:minCount 1 ; sh:pattern "^ike/" ;
+  ] ;
+  sh:property [
+    sh:path uw:articleId ; sh:minCount 1 ; sh:pattern "^IKE-UW-[0-9]+$" ;
+    sh:message "IKE documents must carry an article id such as IKE-UW-310." ;
+  ] ;
+  sh:property [
+    sh:path uw:datastore ; sh:hasValue "guidelines" ;
+  ] ;
+  sh:property [
+    sh:path uw:fromDocument ; sh:minCount 1 ; sh:class uw:Document ;
+  ] .
+
+uw:AccumulationShape a sh:NodeShape ;
+  sh:targetClass uw:Accumulation ;
+  sh:property [
+    sh:path uw:id ; sh:minCount 1 ; sh:pattern "^exposure/accum" ;
+  ] ;
+  sh:property [
+    sh:path uw:inForceTiv ; sh:minCount 1 ; sh:datatype xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path uw:cap ; sh:minCount 1 ; sh:datatype xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path uw:cappedBy ; sh:minCount 1 ; sh:class uw:Guideline ;
+    sh:message "An accumulation must point at the IKE article that states the cap." ;
+  ] ;
+  sh:property [
+    sh:path uw:datastore ; sh:hasValue "exposures" ;
+  ] .
+
+uw:DecisionTraceShape a sh:NodeShape ;
+  sh:targetClass uw:DecisionTrace ;
+  sh:property [
+    sh:path uw:aboutAccount ; sh:minCount 1 ; sh:class uw:Account ;
+  ] ;
+  sh:property [
+    sh:path uw:appliedPolicy ; sh:minCount 1 ; sh:class uw:Guideline ;
+  ] .
+
+uw:DocumentShape a sh:NodeShape ;
+  sh:targetClass uw:Document ;
+  sh:property [
+    sh:path uw:name ; sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path uw:hasChunk ; sh:minCount 1 ; sh:class uw:Chunk ;
+  ] .
